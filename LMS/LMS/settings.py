@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = 2
+DATABASES = 1
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {
