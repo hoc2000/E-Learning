@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-import django_heroku
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$q-5r0mxb%y(5k&l%1+c*@dc89_a7&pn)f=!wgm3d_mz!5-0%)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'LMS.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,7 +79,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = 1
+DATABASES = 2
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {
@@ -160,5 +158,3 @@ EMAIL_HOST_PASSWORD = 'mplxvkkainwleodo'
 
 KEY_ID = ''
 KEY_SECRET = ''
-
-django_heroku.settings(locals())

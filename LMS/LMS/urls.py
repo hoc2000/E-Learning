@@ -1,12 +1,10 @@
-from django import urls
+
 from django.contrib import admin
 from django.urls import path, include
 from .import views, user_login
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.views.static import serve
-from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -54,11 +52,5 @@ urlpatterns = [
 
     path('course/<slug:course_slug>/<slug:quizz_slug>/save',
          views.save_quiz_view, name='save_quiz_view'),
-
-    url(r'^media/(?P<path>.*)$', serve,
-        {'document_root':       settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve,
-        {'document_root': settings.STATIC_ROOT}),
-
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
