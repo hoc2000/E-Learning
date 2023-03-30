@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$q-5r0mxb%y(5k&l%1+c*@dc89_a7&pn)f=!wgm3d_mz!5-0%)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.88.163', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = 2
+DATABASES = 3
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {
@@ -99,7 +99,18 @@ elif DEBUG and (DATABASES == 2):
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+elif DEBUG and (DATABASES == 3):
+    DATABASES = {
+        "default": {
+            "ENGINE": "mssql",
+            "NAME": "DJANGO_COURSE",
+            "USER": "sa",
+            "PASSWORD": "tranquan98.kt",
+            "HOST": "10.2.6.73",
+            "PORT": "1433",
 
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -125,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 

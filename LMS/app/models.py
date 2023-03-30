@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
@@ -5,7 +6,7 @@ from django.contrib.auth.models import User
 import random
 from django.contrib.auth.models import AbstractUser
 
-# Categories
+# Categoriess
 
 
 class Categories(models.Model):
@@ -22,9 +23,12 @@ class Categories(models.Model):
 
 
 class Author(models.Model):
-    author_profile = models.ImageField(upload_to="Media/author")
+    author_profile = models.ImageField(
+        upload_to="Media/author", default='Media/author/2021-11-19-14-04-25_0.png')
     name = models.CharField(max_length=100, null=True)
     about_author = models.TextField()
+    created_at = models.DateTimeField(
+        default=timezone.datetime.now(), editable=False)
 
     def __str__(self):
         return self.name
@@ -72,7 +76,8 @@ class Course(models.Model):
     discount = models.IntegerField(null=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True)
     deadline = models.CharField(max_length=100, null=True)
-    slug = models.SlugField(default='', max_length=500, null=True, blank=True)
+    slug = models.SlugField(default='', max_length=500,
+                            null=True, blank=True, editable=False)
     status = models.CharField(choices=STATUS, max_length=100, null=True)
     certificate = models.CharField(max_length=100, null=True)
 
@@ -140,6 +145,15 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Document(models.Model):
+    serial_number = models.IntegerField(null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class UserCourse(models.Model):
