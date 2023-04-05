@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
+# TabularInline in course
+
 
 class what_you_learn_TabularInline(admin.TabularInline):
     model = What_you_learn
@@ -19,9 +21,59 @@ class Document_TaularInline(admin.TabularInline):
     model = Document
 
 
-class course_admin(admin.ModelAdmin):
+class Course_display(admin.ModelAdmin):
+    list_display = [
+        'img_preview',
+        'title',
+        'category',
+        'author',
+        'price',
+        'created_at',
+    ]
+    list_display_links = [
+        'title',
+    ]
+    list_filter = [
+        'category',
+        'author'
+    ]
+    readonly_fields = ('img_preview', 'created_at')
+
     inlines = (what_you_learn_TabularInline,
                Requirements_TabularInline, Document_TaularInline, Video_TabularInline)
+
+
+class Author_display(admin.ModelAdmin):
+    list_display = [
+        'img_preview',
+        'name',
+        'created_at',
+    ]
+    list_display_links = [
+        'name',
+    ]
+    list_filter = [
+        'name',
+        'created_at',
+    ]
+    readonly_fields = ('img_preview', 'created_at')
+
+# LESSON
+
+
+class Lesson_display(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'course',
+    ]
+    list_display_links = [
+        'name'
+    ]
+    list_filter = [
+        'course',
+    ]
+
+# QUIZ REGISTER
 
 
 class create_question(admin.TabularInline):
@@ -41,13 +93,13 @@ class question_admin(admin.ModelAdmin):
 
 
 admin.site.register(Categories)
-admin.site.register(Author)
-admin.site.register(Course, course_admin)
+admin.site.register(Author, Author_display)
+admin.site.register(Course, Course_display)
 admin.site.register(Comment)
 admin.site.register(Level)
 # admin.site.register(Language)
 admin.site.register(Requirements)
-admin.site.register(Lesson)
+admin.site.register(Lesson, Lesson_display)
 admin.site.register(UserCourse)
 admin.site.register(Payment)
 admin.site.register(Question, question_admin)

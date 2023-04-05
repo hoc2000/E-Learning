@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['192.168.88.163', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -153,6 +154,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -169,3 +173,9 @@ EMAIL_HOST_PASSWORD = 'mplxvkkainwleodo'
 
 KEY_ID = ''
 KEY_SECRET = ''
+
+# JAZZMIN SETTING
+JAZZMIN_SETTINGS = {
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "CoursePM"
+}

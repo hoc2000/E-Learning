@@ -1,7 +1,9 @@
 from django.utils import timezone
 from django.db import models
-from django.utils.text import slugify
-from django.db.models.signals import pre_save
+from django.utils.text import slugify  # auto create slug
+from django.db.models.signals import pre_save  # presave auto create and save
+from django.template.defaultfilters import truncatechars
+from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import random
 from django.contrib.auth.models import AbstractUser
@@ -19,16 +21,27 @@ class Categories(models.Model):
     def get_all_category(self):
         return Categories.objects.all().order_by('id')
 
-# Author models
+####### AUTHOR models#############
 
 
 class Author(models.Model):
     author_profile = models.ImageField(
-        upload_to="Media/author", default='Media/author/2021-11-19-14-04-25_0.png')
+        upload_to="author", default='author/2021-11-19-14-04-25_0.png')
     name = models.CharField(max_length=100, null=True)
     about_author = models.TextField()
+    slug = models.SlugField(default='', max_length=500,
+                            null=True, blank=True,)
     created_at = models.DateTimeField(
         default=timezone.datetime.now(), editable=False)
+
+    @property
+    def short_description(self):
+        return truncatechars(self.about_author, 20)
+
+    def img_preview(self):
+        return mark_safe('<img src="{}" width="80" />'.format(self.author_profile.url))
+    img_preview.short_description = 'Image'
+    img_preview.allow_tags = True
 
     def __str__(self):
         return self.name
@@ -56,15 +69,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.course_review + " - " + self.comment
 
+# COURSE
+
 
 class Course(models.Model):
     STATUS = (
         ('PUBLISH', 'PUBLISH'),
         ('DRAFT', 'DRAFT'),
     )
-
-    featured_image = models.ImageField(
-        upload_to="Media/featured_img", null=True)
     featured_video = models.CharField(max_length=300, null=True)
     title = models.CharField(max_length=500)
     created_at = models.DateField(auto_now_add=True)
@@ -80,16 +92,28 @@ class Course(models.Model):
                             null=True, blank=True, editable=False)
     status = models.CharField(choices=STATUS, max_length=100, null=True)
     certificate = models.CharField(max_length=100, null=True)
+    featured_image = models.ImageField(
+        upload_to="featured_img", default='featured_img/gun_gru.jpg', null=True)
 
     def __str__(self):
         return self.title
+
+    def short_description(self):
+        return truncatechars(self.description, 20)
+
+    def img_preview(self):
+        return mark_safe('<img src="{}" width="80" />'.format(self.featured_image.url))
+    img_preview.short_description = 'Image'
+    img_preview.allow_tags = True
 
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse("course_details", kwargs={'slug': self.slug})
 
+# Tự tạo slug cho Course
 
-def create_slug(instance, new_slug=None):
+
+def create_slug_course(instance, new_slug=None):
     slug = slugify(instance.title)
     if new_slug is not None:
         slug = new_slug
@@ -97,16 +121,37 @@ def create_slug(instance, new_slug=None):
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" % (slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
+        return create_slug_course(instance, new_slug=new_slug)
     return slug
 
 
-def pre_save_post_receiver(sender, instance, *args, **kwargs):
+def pre_save_post_receiver_course(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = create_slug(instance)
+        instance.slug = create_slug_course(instance)
+
+# Tạo slug cho author
 
 
-pre_save.connect(pre_save_post_receiver, Course)
+def create_slug_author(instance, new_slug=None):
+    slug = slugify(instance.name)
+    if new_slug is not None:
+        slug = new_slug
+    qs = Author.objects.filter(slug=slug).order_by('-id')
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s-%s" % (slug, qs.first().id)
+        return create_slug_author(instance, new_slug=new_slug)
+    return slug
+
+
+def pre_save_post_receiver_author(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug_author(instance)
+
+
+# PreSave sau khi Save
+pre_save.connect(pre_save_post_receiver_course, Course)
+pre_save.connect(pre_save_post_receiver_author, Author)
 
 
 class What_you_learn(models.Model):
@@ -135,9 +180,9 @@ class Lesson(models.Model):
 
 class Video(models.Model):
     serial_number = models.IntegerField(null=True)
-    thumbnail = models.ImageField(upload_to="Media/Yt_Thumbnail", null=True)
+    # thumbnail = models.ImageField(upload_to="Yt_Thumbnail", null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    lessson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     youtube_id = models.CharField(max_length=200)
     time_duration = models.IntegerField(null=True)
@@ -149,8 +194,12 @@ class Video(models.Model):
 
 class Document(models.Model):
     serial_number = models.IntegerField(null=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True)
+    file = models.FileField(upload_to="Documents",
+                            max_length=100, null=True)
+    preview = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

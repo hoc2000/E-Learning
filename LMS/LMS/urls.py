@@ -52,8 +52,10 @@ urlpatterns = [
 
     path('course/<slug:course_slug>/<slug:quizz_slug>/save',
          views.save_quiz_view, name='save_quiz_view'),
-    # instructors
-    path('instructor/', views.single_instructor, name='single-instructor')
+
+    path('download/<int:document_id>/', views.downloadfile, name='download'),
+    # INSTRUCTOR_URL
+    path('instructor/', views.VIEW_INSTRUCTOR.as_view(), name='single-instructor')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

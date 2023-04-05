@@ -1,3 +1,5 @@
+
+from django.shortcuts import get_object_or_404
 from time import time
 import numpy as np
 from django.shortcuts import redirect, render
@@ -7,6 +9,8 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Sum
 from django.contrib import messages
+from django.http import HttpResponse
+
 
 from .settings import *
 import razorpay
@@ -252,9 +256,21 @@ def WATCH_COURSE(request, slug):
     return render(request, 'course/watch-course.html', context)
 
 
-def single_instructor(request):
-    # id = Author
-    return render(request, 'instructor/instructors-single.html')
+# INSTRUCTOR
+
+
+class VIEW_INSTRUCTOR(View):
+    def get(self, request):
+        id = Author.objects.get
+        return render(request, 'instructor/instructors_details.html')
+# Tải file về
+
+
+def downloadfile(request, document_id):
+    document = get_object_or_404(Document, pk=document_id)
+    response = HttpResponse(document.file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{document.file.name}"'
+    return response
 
 
 def QUIZ(request, course_slug, quizz_slug):

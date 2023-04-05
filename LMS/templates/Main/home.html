@@ -105,7 +105,7 @@
                                 </div>
 
                                 <a href="{{i.get_absolute_url}}" class="card-img sk-thumbnail img-ratio-9 d-block">
-                                    <img class="rounded shadow-light-lg" src="{{i.featured_image}}" alt="...">
+                                    <img class="rounded shadow-light-lg" src="{{i.featured_image.url}}" alt="...">
                                 </a>
 
                                 <span
@@ -120,7 +120,7 @@
                                 <a href="{{i.get_absolute_url}}" class="d-block">
                                     <div
                                         class="avatar avatar-xl badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg">
-                                        <img src="{{i.author.author_profile}}" alt="..."
+                                        <img src="{{i.author.author_profile.url}}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                 </a>
@@ -253,7 +253,7 @@
                                 </div>
 
                                 <a href="{{i.get_absolute_url}}" class="card-img sk-thumbnail img-ratio-9 d-block">
-                                    <img class="rounded shadow-light-lg" src="/{{i.featured_image}}" alt="...">
+                                    <img class="rounded shadow-light-lg" src="{{i.featured_image.url}}" alt="...">
                                 </a>
 
                                 <span
@@ -268,7 +268,7 @@
                                 <a href="{{i.get_absolute_url}}" class="d-block">
                                     <div
                                         class="avatar avatar-xl badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg">
-                                        <img src="{{i.author.author_profile}}" alt="..."
+                                        <img src="{{i.author.author_profile.url}}" alt="..."
                                             class="avatar-img rounded-circle">
                                     </div>
                                 </a>
@@ -542,7 +542,7 @@
 
                         <a href="{% url '404' %}"
                             class="card-img sk-thumbnail img-ratio-4 card-hover-overlay card-hover-overlay-gradient-1 d-block"><img
-                                class="rounded shadow-light-lg img-fluid" src="{{i.author_profile}}" alt="..."></a>
+                                class="rounded shadow-light-lg img-fluid" src="{{i.author_profile.url}}" alt="..."></a>
                     </div>
 
                     <!-- Footer -->
