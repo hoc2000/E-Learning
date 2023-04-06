@@ -113,6 +113,21 @@ elif DEBUG and (DATABASES == 3):
 
         },
     }
+elif DEBUG and (DATABASES == 4):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'sql_server.pyodbc',
+            'NAME': 'DJANGO_COURSE',
+            'USER': 'sa',
+            'PASSWORD': 'tranquan98.kt',
+            'HOST': '10.2.6.73',
+            'PORT': '1433',
+
+            'OPTIONS': {
+                'driver': 'ODBC Driver 13 for SQL Server',
+            },
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
