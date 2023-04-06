@@ -10,10 +10,8 @@ from django.http import JsonResponse
 from django.db.models import Sum
 from django.contrib import messages
 from django.http import HttpResponse
-
-
 from .settings import *
-import razorpay
+# import razorpay
 
 # client = razorpay.Client(auth=(KEY_ID,KEY_SECRET))
 
@@ -37,7 +35,7 @@ def HOME(request):
     return render(request, 'Main/home.html', context)
 
 
-def SINGLE_COURSE(request):
+def COURSE_GRID(request):
     category = Categories.get_all_category(Categories)
     level = Level.objects.all()
     course = Course.objects.all()
@@ -46,7 +44,7 @@ def SINGLE_COURSE(request):
         'level': level,
         'course': course,
     }
-    return render(request, 'Main/single_course.html', context)
+    return render(request, 'Main/course_grid.html', context)
 
 
 def CONTACT_US(request):
@@ -239,19 +237,40 @@ def MY_COURSE(request):
 
 def WATCH_COURSE(request, slug):
     course = Course.objects.filter(slug=slug)
-    lecture = request.GET.get('lecture')
+    lecture = request.GET.get('id')
+    # print("-----------------------")
+    # print(lecture)
+    # print(type(lecture))
+    # print("-----------------------")
+    result = Result.objects.all()
     video = None
     if lecture:
         video = Video.objects.get(id=lecture)
+        print("-----------------------")
+        print(lecture)
+        # print(type(lecture))
+        print("-----------------------")
 
     if course.exists():
         course = course.first()
     else:
         return redirect('404')
+
+    user = request.user
+    if user.id == None:
+        check_enroll = None
+    else:
+        try:
+            check_enroll = UserCourse.objects.get(
+                user=request.user, course=course)
+        except UserCourse.DoesNotExist:
+            check_enroll = None
+
     context = {
         'course': course,
         'video': video,
-
+        'check_enroll': check_enroll,
+        'result': result,
     }
     return render(request, 'course/watch-course.html', context)
 
@@ -260,17 +279,28 @@ def WATCH_COURSE(request, slug):
 
 
 class VIEW_INSTRUCTOR(View):
-    def get(self, request):
-        id = Author.objects.get
-        return render(request, 'instructor/instructors_details.html')
+    def get(self, request, author_id):
+        Select_author = Author.objects.get(id=author_id)
+        course = Course.objects.filter(author_id=author_id)
+
+        context = {
+            'author': Select_author,
+            'course': course,
+        }
+
+        return render(request, 'instructor/instructors-single.html', context)
 # Tải file về
 
 
-def downloadfile(request, document_id):
-    document = get_object_or_404(Document, pk=document_id)
-    response = HttpResponse(document.file, content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{document.file.name}"'
-    return response
+# def DOWNLOAD_FILE(request, document_id):
+#     document = get_object_or_404(Document, pk=document_id)
+#     print(type("document.file"))
+
+#     # octet-stream không xác định trước nội dung
+#     response = HttpResponse(
+#         document.file, content_type='application/pdf')
+#     response['Content-Disposition'] = f'attachment; filename="{document.file.name}"'
+#     return response
 
 
 def QUIZ(request, course_slug, quizz_slug):

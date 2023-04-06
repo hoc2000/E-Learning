@@ -26,7 +26,7 @@
                     Technology is bringing a massive wave of evolution on learning things in different ways.</p>
 
                 <!-- Buttons -->
-                <a href="{% url 'single_course' %}"
+                <a href="{% url 'course_grid' %}"
                     class="btn btn-pill btn-helio btn-gradient-1 text-white btn-x-wide shadow lift mb-5 mt-1"
                     data-aos="fade-up" data-aos-duration="200">VIEW COURSES</a>
             </div>
@@ -411,7 +411,7 @@
     </div>
 </section>
 
-<!-- BLOG
+<!-- NEWS
     ================================================== -->
 <section class="py-5 py-md-8 bg-white">
     <div class="container container-wd">
@@ -540,7 +540,7 @@
 
                         </div>
 
-                        <a href="{% url '404' %}"
+                        <a href="{% url 'single-instructor' i.id%}"
                             class="card-img sk-thumbnail img-ratio-4 card-hover-overlay card-hover-overlay-gradient-1 d-block"><img
                                 class="rounded shadow-light-lg img-fluid" src="{{i.author_profile.url}}" alt="..."></a>
                     </div>

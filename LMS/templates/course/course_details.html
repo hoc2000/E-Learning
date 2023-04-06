@@ -187,17 +187,26 @@
                                     <div class="border-top px-5 py-4 min-height-70 d-md-flex align-items-center">
                                         <div class="d-flex align-items-center me-auto mb-4 mb-md-0">
                                             <div class="text-secondary d-flex">
+                                                {% if document.file_type is None %}
                                                 <img src=" {% static 'assets/icon/icon-documents.png' %}" alt=''></img>
+                                                {% elif document.file_type == "pdf" %}
+                                                <img src="{% static 'assets/icon/pdf-icon.png' %}" alt="">
+                                                {% elif document.file_type == "docx" %}
+                                                <img src="{% static 'assets/icon/icon-word.png' %}" alt="">
+                                                {% elif document.file_type == "pptx" %}
+                                                <img src="{% static 'assets/icon/pptx-icon.png' %}" alt="">
+                                                {% endif %}
                                             </div>
                                             {% if check_enroll is not None %}
-                                            <a href="{% url 'download' document.id %}">
+                                            <a href="{{document.file.url}}" download>
+
                                                 <div class="ms-4">
                                                     {{document.name}}
                                                 </div>
                                             </a>
                                             {% else %}
                                             {% if document.preview == True %}
-                                            <a href="{% url 'download' document.id %}" class="rounded" data-fancybox>
+                                            <a href="{{document.file.url}}" download>
                                                 <div class="ms-4">
                                                     {{document.name}}
                                                 </div>
@@ -279,8 +288,7 @@
                                                 <img src=" {% static 'assets/icon/play-video.png' %}" alt=''></img>
                                             </div>
                                             {% if check_enroll is not None %}
-                                            <a
-                                                href="/course/watch-course/{{course.slug}}?lecture={{video.serial_number}}">
+                                            <a href="/course/watch-course/{{course.slug}}?id={{video.id}}">
                                                 <div class="ms-4">
                                                     {{video.title}}
                                                 </div>

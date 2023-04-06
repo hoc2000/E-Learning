@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from .jazzmin import JAZZMIN_SETTINGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-$q-5r0mxb%y(5k&l%1+c*@dc89_a7&pn)f=!wgm3d_mz!5-0%)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.88.163', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['localhost', '192.168.88.163']
 
 
 # Application definition
@@ -175,7 +176,10 @@ KEY_ID = ''
 KEY_SECRET = ''
 
 # JAZZMIN SETTING
-JAZZMIN_SETTINGS = {
-    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "CoursePM"
-}
+# JAZZMIN_SETTINGS = {
+#     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+#     "site_brand": "CoursePM",
+#     # Use modals instead of popups
+#     "related_modal_active": True,
+# }
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS

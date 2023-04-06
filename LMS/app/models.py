@@ -46,6 +46,9 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+    def author_snippet(self):
+        return self.about_author[:300] + "..."
+
 
 class Level(models.Model):
     name = models.CharField(max_length=100)
@@ -179,8 +182,9 @@ class Lesson(models.Model):
 
 
 class Video(models.Model):
-    serial_number = models.IntegerField(null=True)
-    # thumbnail = models.ImageField(upload_to="Yt_Thumbnail", null=True)
+
+    thumbnail = models.ImageField(
+        upload_to="Yt_Thumbnail", default="Yt_Thumbnail/youtube-thumbnails.jpg", null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -193,12 +197,18 @@ class Video(models.Model):
 
 
 class Document(models.Model):
-    serial_number = models.IntegerField(null=True)
+    TYPE = (
+        ('pdf', 'pdf'),
+        ('docx', 'docx'),
+        ('pptx', 'pptx'),
+    )
     name = models.CharField(max_length=100)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True)
     file = models.FileField(upload_to="Documents",
                             max_length=100, null=True)
+    file_type = models.CharField(
+        choices=TYPE, max_length=10, null=True, blank=True)
     preview = models.BooleanField(default=False)
 
     def __str__(self):

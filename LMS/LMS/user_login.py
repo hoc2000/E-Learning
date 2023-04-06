@@ -2,7 +2,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
 from app.EmailBackEnd import EmailBackEnd
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
+
 
 def REGISTER(request):
     if request.method == 'POST':
@@ -28,7 +29,8 @@ def REGISTER(request):
         user.save()
         return redirect('login')
 
-    return render(request,'registration/register.html')
+    return render(request, 'registration/register.html')
+
 
 def DO_LOGIN(request):
     if request.method == "POST":
@@ -45,8 +47,10 @@ def DO_LOGIN(request):
             messages.error(request, 'Email and Password Are Invalid !')
             return redirect('login')
 
+
 def PROFILE(request):
-    return render(request,'registration/profile.html')
+    return render(request, 'registration/profile.html')
+
 
 def PROFILE_UPDATE(request):
     if request.method == "POST":

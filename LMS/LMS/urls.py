@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('', views.HOME, name='home'),
 
-    path('courses', views.SINGLE_COURSE, name='single_course'),
+    path('courses', views.COURSE_GRID, name='course_grid'),
 
     path('courses/filter-data', views.filter_data, name="filter-data"),
 
@@ -53,9 +53,10 @@ urlpatterns = [
     path('course/<slug:course_slug>/<slug:quizz_slug>/save',
          views.save_quiz_view, name='save_quiz_view'),
 
-    path('download/<int:document_id>/', views.downloadfile, name='download'),
+    #     path('download/<int:document_id>/', views.DOWNLOAD_FILE, name='download'),
     # INSTRUCTOR_URL
-    path('instructor/', views.VIEW_INSTRUCTOR.as_view(), name='single-instructor')
+    path('instructor/<int:author_id>',
+         views.VIEW_INSTRUCTOR.as_view(), name='single-instructor')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
