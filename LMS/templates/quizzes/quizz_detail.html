@@ -11,33 +11,33 @@ Quizz - {{quiz.topic}}
 {% endblock %}
 {% block content %}
 <section class="ftco-section">
-<div class="container" id="quiz">
-    <hr>
-    <div class="row">
-        <div class="text-right" id="timer-box"></div>
-        <div class="col">
-            <h1 class="text-center">{{quiz.topic}}</h1>
-            <p>Score to pass: {{quiz.require_passing_score}}</p>   
-        </div>
-        
-    </div>
-    
-    <form id="quiz-form" form="mt-3 mb-3">
-        {% csrf_token %}
-        <div id ='quiz-box'>
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </div>
-    </form>
-    <br>
-    <div class="" id="answer-box"></div>
-    <div class="" id="score-box"></div>
-    <div class="" id="result-box"></div>
-    <div class="" id="button-box"></div>
-</div>
+    <div class="container" id="quiz">
+        <hr>
+        <div class="row">
+            <div class="text-right" id="timer-box"></div>
+            <div class="col">
+                <h1 class="text-center">{{quiz.topic}}</h1>
+                <p>Score to pass: {{quiz.require_passing_score}}</p>
+            </div>
 
-<br>
+        </div>
+
+        <form id="quiz-form" form="mt-3 mb-3">
+            {% csrf_token %}
+            <div id='quiz-box'>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </div>
+        </form>
+        <br>
+        <div class="" id="answer-box"></div>
+        <div class="" id="score-box"></div>
+        <div class="" id="result-box"></div>
+        <div class="" id="button-box"></div>
+    </div>
+
+    <br>
 </section>
 <script type="text/javascript" src="{% static 'quiz/quiz.js' %}"></script>
 <script src="{% static 'quiz/jquery.min.js' %}"></script>
