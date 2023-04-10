@@ -282,10 +282,12 @@ class VIEW_INSTRUCTOR(View):
     def get(self, request, author_id):
         Select_author = Author.objects.get(id=author_id)
         course = Course.objects.filter(author_id=author_id)
+        category = Categories.get_all_category(Categories)
 
         context = {
             'author': Select_author,
             'course': course,
+            'category': category
         }
 
         return render(request, 'instructor/instructors-single.html', context)

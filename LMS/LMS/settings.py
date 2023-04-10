@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$q-5r0mxb%y(5k&l%1+c*@dc89_a7&pn)f=!wgm3d_mz!5-0%)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.88.163']
+ALLOWED_HOSTS = ['localhost', '192.168.88.163', '10.2.6.144', '127.0.0.1', '*']
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = 3
+DATABASES = 2
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {
@@ -94,6 +94,17 @@ if DEBUG and (DATABASES == 1):
             'PORT': '3306',
         }
     }
+# if DEBUG and (DATABASES == 1):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'django_course',
+#             'USER': 'root',
+#             'PASSWORD': '111111',
+#             'HOST': '10.1.3.10',
+#             'PORT': '3306',
+#         }
+#     }
 elif DEBUG and (DATABASES == 2):
     DATABASES = {
         'default': {
@@ -124,7 +135,7 @@ elif DEBUG and (DATABASES == 4):
             'PORT': '1433',
 
             'OPTIONS': {
-                'driver': 'FreeTDS',
+                'driver': 'ODBC Driver 13 for SQL Server',
             },
         },
     }
