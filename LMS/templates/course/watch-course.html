@@ -207,7 +207,7 @@
                             </svg>
 
                         </div>
-                        {% if video.thumbnail.url %}
+                        {% if video.thumbnail.url not None %}
                         <img class="rounded shadow-light-lg" src="{{video.thumbnail.url}}" alt="...">
                         {% else %}
                         <img src=" {% static 'assets/img/not-found.png' %} " alt="...">
