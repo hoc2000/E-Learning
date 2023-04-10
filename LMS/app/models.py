@@ -12,7 +12,13 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Categories(models.Model):
-    icon = models.CharField(max_length=200, null=True)
+    choice_icon = (
+        ('fab fa-python', 'python'),
+        ('fab fa-java', 'java'),
+        ('fas fa-snowman', 'snowman')
+    )
+
+    icon = models.CharField(choices=choice_icon, max_length=200, null=True)
     name = models.CharField(max_length=200)
 
     def __str__(self):

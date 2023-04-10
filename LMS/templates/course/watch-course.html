@@ -207,7 +207,10 @@
                             </svg>
 
                         </div>
+                        {% if video.thumbnail.url %}
                         <img class="rounded shadow-light-lg" src="{{video.thumbnail.url}}" alt="...">
+                        {% endif %}
+                        <img src=" {% static 'assets/img/not-found.png' %} " alt="...">
                     </a>
 
                     <h3 class="">Course Description</h3>
