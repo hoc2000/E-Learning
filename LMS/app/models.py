@@ -25,7 +25,7 @@ class Categories(models.Model):
         return self.name
 
     def get_all_category(self):
-        return Categories.objects.all().order_by('id')
+        return Categories.objects.all().order_by('-id')
 
 ####### AUTHOR models#############
 
@@ -106,6 +106,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['id']
 
     def short_description(self):
         return truncatechars(self.description, 20)

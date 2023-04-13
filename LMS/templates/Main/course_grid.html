@@ -19,13 +19,12 @@
             });
 
             $.ajax({
-                url: '{% url '
-                filter - data ' %}',
+                url: '{% url 'filter-data' %}',
                 data: filter_object,
                 dataType: 'json',
                 success: function (res) {
                     console.log(res)
-                    $("#filteredProducts").html(res.data);
+                    $("#filteredCourses").html(res.data);
                     var filter_value = $(this).val();
                     var filter_key = $(this).data('filter');
                 }
@@ -59,7 +58,7 @@
 
 <!-- CONTROL BAR
     ================================================== -->
-<div class="container mb-6 mb-xl-8 z-index-2">
+{% comment %} <div class="container mb-6 mb-xl-8 z-index-2">
     <div class="d-lg-flex align-items-center mb-6 mb-xl-0">
         <p class="mb-lg-0">We found <span class="text-dark">834 courses</span> available for you</p>
         <div class="ms-lg-auto d-lg-flex flex-wrap">
@@ -78,9 +77,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 
-<!-- COURSE LIST V2
+<!-- COURSE LIST 
     ================================================== -->
 <div class="container">
     <div class="row">
@@ -124,6 +123,7 @@
                                     id="category-{{i.id}}" data-filter="category" value="{{i.id}}">
                                 <label class="custom-control-label font-size-base" for="category-{{i.id}}">{{i.name}}
                                     ({{i.course_set.all.count}})</label>
+                                
                             </li>
                             {% endfor %}
                         </ul>
@@ -238,9 +238,10 @@
                         <!-- Image -->
 
                         <div class="card-zoom position-relative">
-                            <div class="badge-float sk-fade-top top-0 right-0 mt-4 me-4">
+                            {% comment %} <div class="badge-float sk-fade-top top-0 right-0 mt-4 me-4">
                                 <a href="/course/{{i.slug}}"
                                     class="btn btn-xs btn-dark text-white rounded-circle lift opacity-dot-7 me-1 p-2 d-inline-flex justify-content-center align-items-center w-36 h-36">
+
                                     <!-- Icon -->
                                     <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -262,7 +263,7 @@
                                     </svg>
 
                                 </a>
-                            </div>
+                            </div> {% endcomment %}
 
                             <a href="/course/{{i.slug}}" class="card-img sk-thumbnail d-block">
                                 <img class="rounded shadow-light-lg" src="{{i.featured_image.url}}" alt="...">
@@ -367,8 +368,38 @@
 
             <!-- PAGINATION
                 ================================================== -->
-            <nav class="mb-11" aria-label="Page navigationa">
-                <ul class="pagination justify-content-center">
+            <!--tag để xét điều kiện của Pagination django-->
+                {% if course.has_other_pages %}
+                <nav class="mb-11" aria-label="Page navigationa">
+
+                    <ul class="pagination justify-content-center">
+                        {% if course.has_previous %}
+                            <a class="page-link" href="{% url 'course_grid' %}?page={{course.previous_page_number}}" aria-label="Previous">
+                                <span aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+                            </a>
+                            {% else %}
+                                <span class="page-link"  aria-label="Previous">
+                                <i class="fas fa-arrow-left"></i></span>
+                            </a>
+                        {% endif %}
+                        {% for i in course.paginator.page_range  %}
+                            {% if course.number == i %}
+                            <li class=" page-item active"> <span class="page-link" href="">{{i}}</span> </li>
+                                {% else %}
+                                <li class="page-item"> <a class="page-link" href=" {% url 'course_grid' %}?page={{i}}">{{i}}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if course.has_next %}
+                            <a class="page-link" href="{% url 'course_grid' %}?page={{course.next_page_number}}" aria-label="Previous">
+                                <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                            </a>
+                            {% else %}
+                                <span class="page-link"  aria-label="Next">
+                                <i class="fas fa-arrow-right"></i></span>
+                        {% endif %}
+                    </ul>
+                {% comment %} <ul class="pagination justify-content-center">
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
                             <span aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
@@ -382,8 +413,8 @@
                             <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
                         </a>
                     </li>
-                </ul>
-            </nav>
+                </ul> {% endcomment %}
+                {% endif %}
 
         </div>
     </div>

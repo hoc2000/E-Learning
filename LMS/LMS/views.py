@@ -2,6 +2,7 @@
 from django.shortcuts import get_object_or_404
 from time import time
 import numpy as np
+import math as ceil
 from django.shortcuts import redirect, render
 from app.models import *
 from django.views import View
@@ -10,6 +11,7 @@ from django.http import JsonResponse
 from django.db.models import Sum
 from django.contrib import messages
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .settings import *
 # import razorpay
 
@@ -34,11 +36,27 @@ def HOME(request):
     }
     return render(request, 'Main/home.html', context)
 
+# Tạo course grid và pagination
+
 
 def COURSE_GRID(request):
     category = Categories.get_all_category(Categories)
     level = Level.objects.all()
-    course = Course.objects.all()
+    course_list = Course.objects.all()
+    # lấy page ban đầu lấy là 1
+    page = request.GET.get('page', 1)
+
+    # 4 course 1 page
+    # print("Số trang sẽ được tạo là:", page)
+    paginator = Paginator(course_list, 4)
+    # print(page.num_pages)
+    try:
+        course = paginator.page(page)
+    except PageNotAnInteger:
+        course = paginator.page(1)
+    except EmptyPage:
+        course = paginator.page(paginator.num_pages)
+    # print(course.paginator.page_range)
     context = {
         'category': category,
         'level': level,

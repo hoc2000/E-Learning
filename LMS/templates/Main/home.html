@@ -4,7 +4,7 @@
 {% load course_tags %}
 <!-- HERO
     ================================================== -->
-<section class="pb-11 pt-13 pt-xl-14 mt-n12 position-relative">
+<section class="pb-11 pt-13 pt-xl-14 mt-n12 position-relative bg-white">
     <div class="position-absolute top-0 right-0">
         <img src="{% static 'assets/img/illustrations/illustration-7.svg' %}" class="img-fluid" alt="...">
     </div>
@@ -18,8 +18,8 @@
             </div>
             <div class="col-15 col-md-7 col-lg-8 order-md-8">
                 <!-- Heading -->
-                <h1 class="display-2" data-aos="fade-left" data-aos-duration="150">Find The Best <span
-                        class="fw-bold">Courses</span></h1>
+                <h1 class="display-2" data-aos="fade-left" data-aos-duration="150">Get certificate then <span
+                        class="slogan fw-bold">take money </span></h1>
 
                 <!-- Text -->
                 <p class="text-capitalize me-xl-11 me-wd-14 pe-wd-4" data-aos="fade-up" data-aos-duration="200">
@@ -36,7 +36,7 @@
 
 <!-- FEATURED COURSES
     ================================================== -->
-<section class="pt-5 pb-9 py-md-11 bg-white">
+<section class="course pt-5 pb-9   ">
     <div class="container container-wd">
         <div class="row align-items-end mb-7">
             <div class="col-xl mb-5 mb-xl-0">
@@ -67,7 +67,7 @@
 
             <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
                 <!-- Items -->
-                <div class="mx-n4 flickity-button-outset"
+                <div class="  mx-n4 flickity-button-outset"
                     data-flickity='{"pageDots": true, "prevNextButtons": true, "cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
                     {% for i in course %}
                     <div class="col-12 col-md-6 col-xl-4 col-wd-3 pb-4 pb-md-7"
@@ -107,12 +107,13 @@
                                 <a href="{{i.get_absolute_url}}" class="card-img sk-thumbnail img-ratio-9 d-block">
                                     <img class="rounded shadow-light-lg" src="{{i.featured_image.url}}" alt="...">
                                 </a>
-
+                                {% if i.discount != 0  %}
                                 <span
                                     class="badge sk-fade-bottom badge-lg badge-primary badge-pill badge-float bottom-0 left-0 mb-4 ms-4 fw-bold">
                                     <span class="text-white text-uppercase fw-bold font-size-xs">Discount {{i.discount}}
                                         %</span>
                                 </span>
+                                {% endif %}
                             </div>
 
                             <!-- Footer -->
@@ -365,7 +366,7 @@
 
 <!-- CATEGORIES
     ================================================== -->
-<section class="py-5 py-md-8 bg-white">
+<section class=" py-md-10 bg-white">
     <div class="container container-wd">
         <div class="row align-items-end mb-md-7 mb-4">
             <div class="col-md mb-4 mb-md-0">
@@ -413,7 +414,7 @@
 
 <!-- NEWS
     ================================================== -->
-<section class="py-5 py-md-8 bg-white">
+{% comment %} <section class="py-5 py-md-8 bg-white">
     <div class="container container-wd">
         <div class="row align-items-end mb-4 mb-md-7">
             <div class="col-md mb-4 mb-md-0">
@@ -501,11 +502,11 @@
 
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
 <!-- INSTRUCTORS
     ================================================== -->
-<section class="py-5 py-md-8 bg-white">
+<section class=" instructors py-5 py-md-8  ">
     <div class="container container-wd">
         <div class="row align-items-end mb-3 mb-md-5">
             <div class="col-md mb-4 mb-md-0">
