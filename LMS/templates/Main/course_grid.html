@@ -4,8 +4,9 @@
 {% load course_tags %}
 
 <script>
+    
     $(document).ready(function () {
-
+        var $loading = $(".loadingDiv").hide();
         $(".filter-checkbox").on('click', function () {
             var filter_object = {};
             $(".filter-checkbox").each(function (index, ele) {
@@ -17,18 +18,21 @@
                     return el.value;
                 });
             });
-
+            
             $.ajax({
                 url: '{% url 'filter-data' %}',
                 data: filter_object,
                 dataType: 'json',
                 success: function (res) {
-                    console.log(res)
+                    $loading.hide();
+                    $(".pagiation_course").hide();
+                    //console.log(res)
                     $("#filteredCourses").html(res.data);
                     var filter_value = $(this).val();
                     var filter_key = $(this).data('filter');
                 }
             });
+
         });
     });
 </script>
@@ -81,6 +85,7 @@
 
 <!-- COURSE LIST 
     ================================================== -->
+<div class="loadingDiv"> Loading</div>
 <div class="container">
     <div class="row">
         <div class="col-xl-4 mb-5 mb-xl-0">
@@ -370,7 +375,7 @@
                 ================================================== -->
             <!--tag để xét điều kiện của Pagination django-->
                 {% if course.has_other_pages %}
-                <nav class="mb-11" aria-label="Page navigationa">
+                <nav class="mb-11 pagiation_course" aria-label="Page navigationa">
 
                     <ul class="pagination justify-content-center">
                         {% if course.has_previous %}
@@ -399,21 +404,7 @@
                                 <i class="fas fa-arrow-right"></i></span>
                         {% endif %}
                     </ul>
-                {% comment %} <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
-                        </a>
-                    </li>
-                    <li class="page-item active "><a class="page-link" href="#">1</a></li>
-                    <li class="page-item "><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
-                        </a>
-                    </li>
-                </ul> {% endcomment %}
+                
                 {% endif %}
 
         </div>
