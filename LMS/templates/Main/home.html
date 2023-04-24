@@ -548,7 +548,7 @@
 
                     <!-- Footer -->
                     <div class="card-footer px-3 pt-4 pb-1">
-                        <a href="instructors-single.html" class="d-block">
+                        <a href="{% url 'single-instructor' i.id%}" class="d-block">
                             <h5 class="mb-0"> {{i.name}} </h5>
                         </a>
                         <span class="font-size-d-sm">Developer</span>
