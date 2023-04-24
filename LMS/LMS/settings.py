@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$q-5r0mxb%y(5k&l%1+c*@dc89_a7&pn)f=!wgm3d_mz!5-0%)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.88.163', '10.2.6.144', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = 3
+DATABASES = 2
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {

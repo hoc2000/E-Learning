@@ -50,7 +50,7 @@
                     <a class="btn-sm btn-pill me-1 mb-1 text-dark fw-medium px-6 active" id="pills-all-tab"
                         data-bs-toggle="tab" href="#pills-all" role="tab" aria-controls="pills-all"
                         aria-selected="true">
-                        All Categories
+                        Newest Course
                     </a>
                     {% for i in category %}
                     <a class="btn-sm btn-pill me-1 mb-1 text-dark fw-medium px-6" id="pills-art-tab"
@@ -69,7 +69,7 @@
                 <!-- Items -->
                 <div class="  mx-n4 flickity-button-outset"
                     data-flickity='{"pageDots": true, "prevNextButtons": true, "cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
-                    {% for i in course %}
+                    {% for i in course|slice:":7" %}
                     <div class="col-12 col-md-6 col-xl-4 col-wd-3 pb-4 pb-md-7"
                         style="padding-right:15px;padding-left:15px;">
                         <!-- Card -->
