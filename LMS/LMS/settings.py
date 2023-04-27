@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = 2
+DATABASES = 3
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {
@@ -189,8 +189,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'login'
+# LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

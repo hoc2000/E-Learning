@@ -46,7 +46,7 @@ def COURSE_GRID(request):
     # lấy page ban đầu lấy là 1
     page = request.GET.get('page', 1)
 
-    # 4 course 1 page
+    # 6 course 1 page
     # print("Số trang sẽ được tạo là:", page)
     paginator = Paginator(course_list, 6)
     # print(page.num_pages)
