@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    # 'crispy_forms',
+    'crispy_forms',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -189,14 +189,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGIN_REDIRECT_URL = 'home'
-# LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'hocvu@gmail.com'
-EMAIL_HOST_PASSWORD = 'mplxvkkainwleodo'
+EMAIL_HOST_USER = 'thomasvu2000@gmail.com'
+EMAIL_HOST_PASSWORD = 'bpgogoyrkizmiacj'
 
 KEY_ID = ''
 KEY_SECRET = ''
