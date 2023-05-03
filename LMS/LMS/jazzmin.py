@@ -65,5 +65,5 @@ JAZZMIN_SETTINGS = {
     },
     "related_modal_active": False,
 
-    "changeform_format": "horizontal_tabs",
+    "changeform_format": "single",
 }

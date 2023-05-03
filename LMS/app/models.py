@@ -9,6 +9,7 @@ import random
 from django.contrib.auth.models import AbstractUser
 
 # Categoriess
+# Color
 
 
 class Categories(models.Model):
@@ -187,7 +188,7 @@ class Lesson(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name + " -  " + self.course.title
+        return "Lesson: " + self.name + " -  " + "Course: " + self.course.title
 
 
 class Video(models.Model):

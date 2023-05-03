@@ -817,7 +817,7 @@
                         {% for i in courses|slice:":5"%}
                         <li class="media mb-6 d-flex">
                             <a href="/course/{{i.slug}}" class="w-100p d-block me-5">
-                                <img src="/{{i.featured_image}}" alt="..." class="avatar-img rounded-lg h-90p w-100p">
+                                <img src="/{{i.featured_image.url}}" alt="..." class="avatar-img rounded-lg h-90p w-100p">
                             </a>
                             <div class="media-body flex-grow-1">
                                 <a href="/course/{{i.slug}}" class="d-block">
