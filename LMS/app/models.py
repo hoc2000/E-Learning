@@ -87,7 +87,6 @@ class Course(models.Model):
         ('PUBLISH', 'PUBLISH'),
         ('DRAFT', 'DRAFT'),
     )
-    featured_video = models.CharField(max_length=300, null=True)
     title = models.CharField(max_length=500)
     created_at = models.DateField(auto_now_add=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
