@@ -103,7 +103,7 @@ class Course(models.Model):
     status = models.CharField(choices=STATUS, max_length=100, null=True)
     certificate = models.CharField(max_length=100, null=True)
     featured_image = models.ImageField(
-        upload_to="featured_img", default='featured_img/gun_gru.jpg', null=True)
+        upload_to="featured_img", default='static/course_all.png', null=True)
 
     def __str__(self):
         return self.title
