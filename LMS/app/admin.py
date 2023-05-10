@@ -1,7 +1,5 @@
 from django.contrib import admin
 from .models import *
-from jet.filters import RelatedFieldAjaxListFilter
-from jet.admin import CompactInline
 # Register your models here.
 
 # TabularInline in course
@@ -15,19 +13,16 @@ class Requirements_TabularInline(admin.TabularInline):
     model = Requirements
 
 
-class Video_TabularInline(CompactInline):
+class Video_TabularInline(admin.TabularInline):
     model = Video
-    extra = 1
-    show_change_link = True
 
 
-class Document_TaularInline(CompactInline):
+class Document_TaularInline(admin.TabularInline):
     model = Document
 
 
-class Lesson_TabularInline(CompactInline):
+class Lesson_TaularInline(admin.TabularInline):
     model = Lesson
-    inlines = (Document_TaularInline, Video_TabularInline)
 
 
 class Course_display(admin.ModelAdmin):
@@ -42,14 +37,15 @@ class Course_display(admin.ModelAdmin):
     list_display_links = [
         'title',
     ]
-    list_filter = (
-        ('author', RelatedFieldAjaxListFilter),
-        ('category', RelatedFieldAjaxListFilter),
-    )
+    list_filter = [
+        'category',
+        'author'
+    ]
     readonly_fields = ('img_preview', 'created_at')
 
     inlines = (what_you_learn_TabularInline,
-               Requirements_TabularInline, Lesson_TabularInline)
+               Requirements_TabularInline, Lesson_TaularInline)
+    list_per_page = 11
 
 
 class Author_display(admin.ModelAdmin):
@@ -61,8 +57,12 @@ class Author_display(admin.ModelAdmin):
     list_display_links = [
         'name',
     ]
+    list_filter = [
+        'name',
+        'created_at',
+    ]
     readonly_fields = ('img_preview', 'created_at')
-
+    list_per_page = 11
 # LESSON
 
 
@@ -75,8 +75,10 @@ class Lesson_display(admin.ModelAdmin):
         'name'
     ]
     list_filter = [
-        ('course', RelatedFieldAjaxListFilter),
+        'course',
     ]
+    inlines = (Document_TaularInline, Video_TabularInline)
+    list_per_page = 11
 
 # QUIZ REGISTER
 
@@ -103,7 +105,6 @@ admin.site.register(Course, Course_display)
 admin.site.register(Comment)
 admin.site.register(Level)
 admin.site.register(Video)
-admin.site.register(Language)
 admin.site.register(Requirements)
 admin.site.register(Lesson, Lesson_display)
 admin.site.register(UserCourse)

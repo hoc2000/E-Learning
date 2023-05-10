@@ -8,7 +8,6 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('jet/', include('jet.urls', 'jet')),
 
     path('admin/', admin.site.urls),
 

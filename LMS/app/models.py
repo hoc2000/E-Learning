@@ -189,18 +189,19 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
-    name.search_help_text = "Enter the name of the item you're looking for."
-    course.search_help_text = "Enter a description of the item you're looking for."
-
     def __str__(self):
         return "Lesson: " + self.name + " -  " + "Course: " + self.course.title
+
+    class Meta:
+        ordering = ['id']
 
 
 class Video(models.Model):
 
     thumbnail = models.ImageField(
         upload_to="Yt_Thumbnail", default="Yt_Thumbnail/youtube-thumbnails.jpg", null=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, editable=False)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     youtube_id = models.CharField(max_length=200)
@@ -218,7 +219,8 @@ class Document(models.Model):
         ('pptx', 'pptx'),
     )
     name = models.CharField(max_length=100)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, editable=False)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True)
     file = models.FileField(upload_to="Documents",
                             max_length=100, null=True)

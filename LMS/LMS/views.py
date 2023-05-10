@@ -54,8 +54,8 @@ def COURSE_GRID(request):
         course = paginator.page(page)
     except PageNotAnInteger:
         course = paginator.page(1)
-    except EmptyPage:
-        course = paginator.page(paginator.num_pages)
+    # except EmptyPage:
+    #     course = paginator.page(paginator.num_pages)
     # print(course.paginator.page_range)
     context = {
         'category': category,

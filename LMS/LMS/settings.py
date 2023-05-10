@@ -12,11 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-from .jet import JET_THEMES
-import django
-from django.utils.encoding import smart_str
-django.utils.encoding.smart_text = smart_str
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+from .jazzmin import JAZZMIN_SETTINGS
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -35,8 +32,7 @@ ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 # Application definition
 
 INSTALLED_APPS = [
-    'jet',
-    # 'jazzmin',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -206,5 +202,36 @@ KEY_ID = ''
 KEY_SECRET = ''
 
 # CONFIG JET
-JET_THEMES = JET_THEMES
-JET_SIDE_MENU_COMPACT = True
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+JAZZMIN_SETTINGS["show_ui_builder"] = True
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-orange",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
