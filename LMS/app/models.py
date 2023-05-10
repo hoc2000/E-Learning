@@ -189,6 +189,9 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
+    name.search_help_text = "Enter the name of the item you're looking for."
+    course.search_help_text = "Enter a description of the item you're looking for."
+
     def __str__(self):
         return "Lesson: " + self.name + " -  " + "Course: " + self.course.title
 
