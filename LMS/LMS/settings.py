@@ -9,10 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+
 import os
 from pathlib import Path
-from .jazzmin import JAZZMIN_SETTINGS
-
+from .jet import JET_THEMES
+import django
+from django.utils.encoding import smart_str
+django.utils.encoding.smart_text = smart_str
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,7 +35,8 @@ ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    'jet',
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -175,7 +179,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -201,11 +205,6 @@ EMAIL_HOST_PASSWORD = 'bpgogoyrkizmiacj'
 KEY_ID = ''
 KEY_SECRET = ''
 
-# JAZZMIN SETTING
-# JAZZMIN_SETTINGS = {
-#     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-#     "site_brand": "CoursePM",
-#     # Use modals instead of popups
-#     "related_modal_active": True,
-# }
-JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+# CONFIG JET
+JET_THEMES = JET_THEMES
+JET_SIDE_MENU_COMPACT = True

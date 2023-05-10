@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+from jet.filters import RelatedFieldAjaxListFilter
+from jet.admin import CompactInline
 # Register your models here.
 
 # TabularInline in course
@@ -13,12 +15,19 @@ class Requirements_TabularInline(admin.TabularInline):
     model = Requirements
 
 
-class Video_TabularInline(admin.TabularInline):
+class Video_TabularInline(CompactInline):
     model = Video
+    extra = 1
+    show_change_link = True
 
 
-class Document_TaularInline(admin.TabularInline):
+class Document_TaularInline(CompactInline):
     model = Document
+
+
+class Lesson_TabularInline(CompactInline):
+    model = Lesson
+    inlines = (Document_TaularInline, Video_TabularInline)
 
 
 class Course_display(admin.ModelAdmin):
@@ -33,14 +42,14 @@ class Course_display(admin.ModelAdmin):
     list_display_links = [
         'title',
     ]
-    list_filter = [
-        'category',
-        'author'
-    ]
+    list_filter = (
+        ('author', RelatedFieldAjaxListFilter),
+        ('category', RelatedFieldAjaxListFilter),
+    )
     readonly_fields = ('img_preview', 'created_at')
 
     inlines = (what_you_learn_TabularInline,
-               Requirements_TabularInline, Document_TaularInline, Video_TabularInline)
+               Requirements_TabularInline, Lesson_TabularInline)
 
 
 class Author_display(admin.ModelAdmin):
@@ -51,10 +60,6 @@ class Author_display(admin.ModelAdmin):
     ]
     list_display_links = [
         'name',
-    ]
-    list_filter = [
-        'name',
-        'created_at',
     ]
     readonly_fields = ('img_preview', 'created_at')
 
@@ -70,7 +75,7 @@ class Lesson_display(admin.ModelAdmin):
         'name'
     ]
     list_filter = [
-        'course',
+        ('course', RelatedFieldAjaxListFilter),
     ]
 
 # QUIZ REGISTER

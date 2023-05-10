@@ -122,6 +122,9 @@ class Course(models.Model):
         from django.urls import reverse
         return reverse("course_details", kwargs={'slug': self.slug})
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return 'author', 'category'
 # Tự tạo slug cho Course
 
 

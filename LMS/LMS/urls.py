@@ -8,6 +8,8 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),
+
     path('admin/', admin.site.urls),
 
     path('base', views.BASE, name='base'),
@@ -63,4 +65,6 @@ urlpatterns = [
          views.VIEW_INSTRUCTOR.as_view(), name='single-instructor')
 
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
