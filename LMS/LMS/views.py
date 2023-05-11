@@ -48,7 +48,7 @@ def COURSE_GRID(request):
 
     # 6 course 1 page
     # print("Số trang sẽ được tạo là:", page)
-    paginator = Paginator(course_list, 6)
+    paginator = Paginator(course_list, 9)
     # print(page.num_pages)
     try:
         course = paginator.page(page)
