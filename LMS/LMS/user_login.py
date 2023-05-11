@@ -44,7 +44,7 @@ def DO_LOGIN(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Email and Password Are Invalid !')
+            messages.error(request, 'Email or Password Are Invalid !')
             return redirect('login')
 
 

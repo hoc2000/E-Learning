@@ -99,12 +99,19 @@ class question_admin(admin.ModelAdmin):
     inlines = (create_answer,)
 
 
+class VideoAdmin(admin.ModelAdmin):
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        initial['course'] = Course.objects.first().id  # set default author
+        return initial
+
+
 admin.site.register(Categories)
 admin.site.register(Author, Author_display)
 admin.site.register(Course, Course_display)
 admin.site.register(Comment)
 admin.site.register(Level)
-admin.site.register(Video)
+admin.site.register(Video, VideoAdmin)
 admin.site.register(Requirements)
 admin.site.register(Lesson, Lesson_display)
 admin.site.register(UserCourse)

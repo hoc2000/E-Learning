@@ -197,19 +197,30 @@ class Lesson(models.Model):
 
 
 class Video(models.Model):
-
     thumbnail = models.ImageField(
         upload_to="Yt_Thumbnail", default="Yt_Thumbnail/youtube-thumbnails.jpg", null=True)
-    course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, editable=False)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     youtube_id = models.CharField(max_length=200)
     time_duration = models.IntegerField(null=True)
     preview = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
+
+
+def create_course(instance, select_course=None):
+    course = instance.lesson.course
+    if select_course is not None:
+        course = select_course
+    return course
+
+
+def autofill_course(sender, instance, *args, **kwargs):
+    if not instance.course:
+        instance.course = create_course(instance)
 
 
 class Document(models.Model):
@@ -219,9 +230,9 @@ class Document(models.Model):
         ('pptx', 'pptx'),
     )
     name = models.CharField(max_length=100)
-    course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, editable=False)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, null=True, blank=True, editable=False)
     file = models.FileField(upload_to="Documents",
                             max_length=100, null=True)
     file_type = models.CharField(
@@ -230,6 +241,10 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+
+pre_save.connect(autofill_course, Video)
+pre_save.connect(autofill_course, Document)
 
 
 class UserCourse(models.Model):

@@ -1,38 +1,80 @@
 .slogan {
-    color: #F6B618;
+	color: #F6B618;
 }
 
 
 .header-nav {
-    padding: 0px !important;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 4px 4px rgba(143, 168, 175, 0.25);
+	padding: 0px !important;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0px 4px 4px rgba(143, 168, 175, 0.25);
 }
 
-/* .course {
-    background: #ffdeacf1;
-}
+/* .box-cat {
+    background-color: #ffca7bf1;
+} */
 
 .instructors {
-    background: #ffdeacf1;
-} */
+	background: #ffdeacf1;
+}
+
 .fill-background {
-    background-image: url('../../img/illustrations/illustration-5.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
+	background: #eee6db8f;
 }
 
 .line-top {
-    border-top: 5px solid #41382c
+	border-top: 5px solid #41382c
 }
 
 footer {
-    background-color: #DABB4F
+	background-color: #DABB4F
 }
 
 ;
-/* .item {
-    background: #F6B618;
-} */
+
+/* button hover */
+.button-view {
+	display: inline-block;
+	padding: 0.75rem 1.25rem;
+	border-radius: 10rem;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1rem;
+	letter-spacing: 0.15rem;
+	transition: all 0.3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.button-view:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #0cf;
+	border-radius: 10rem;
+	z-index: -2;
+}
+
+.button-view:before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0%;
+	height: 100%;
+	background-color: #008fb3;
+	transition: all 0.3s;
+	border-radius: 10rem;
+	z-index: -1;
+}
+
+.btn-view:hover {
+	color: #171847;
+}
+
+.button-view:hover:before {
+	width: 100%;
+}
