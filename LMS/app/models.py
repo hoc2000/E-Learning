@@ -6,6 +6,7 @@ from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import random
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 
 # Categoriess
@@ -35,7 +36,7 @@ class Author(models.Model):
     author_profile = models.ImageField(
         upload_to="author", default='author/2021-11-19-14-04-25_0.png')
     name = models.CharField(max_length=100, null=True)
-    about_author = models.TextField()
+    about_author = RichTextField()
     slug = models.SlugField(default='', max_length=500,
                             null=True, blank=True,)
     created_at = models.DateTimeField(
@@ -92,7 +93,7 @@ class Course(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
-    description = models.TextField()
+    description = RichTextField()
     price = models.IntegerField(null=True, default=0)
     discount = models.IntegerField(null=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True)
@@ -216,6 +217,8 @@ def create_course(instance, select_course=None):
     if select_course is not None:
         course = select_course
     return course
+
+# Tự động điền course vào field -gg
 
 
 def autofill_course(sender, instance, *args, **kwargs):

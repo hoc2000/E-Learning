@@ -241,45 +241,22 @@
             <div id="Overview" class="mb-8">
                 <ul class="nav course-tab-v1 border-bottom h4 mb-8">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#Overview" data-bs-toggle="smooth-scroll"
+                        <a class="nav-link active" data-bs-toggle="smooth-scroll"
                             data-bs-offset="0">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Curriculum" data-bs-toggle="smooth-scroll"
-                            data-bs-offset="0">Courses</a>
-                    </li>
                 </ul>
 
                 <h3 class="">About</h3>
-                <p class="mb-6 line-height-md"> {{author.author_snippet}} </p>
-                <p class="collapse mb-6 line-height-md" id="readcollapseExample">{{author.about_author}}</p>
+                <p class="collapse mb-6 line-height-md" id="readcollapseExample">{{author.about_author | safe}}</p>
                 <a class="text-teal read-more h6 d-inline-block" data-bs-toggle="collapse" href="#readcollapseExample"
                     role="button" aria-expanded="false" aria-controls="readcollapseExample">
-                    <span class="d-inline-flex align-items-center more">
-                        Read More
-                        <span
-                            class="d-flex align-items-center justify-content-center bg-teal rounded-circle ms-2 p-2 w-26p">
-                            <i class="fas fa-plus font-size-10 text-white"></i>
-                        </span>
-                    </span>
-                    <span class="d-inline-flex align-items-center less">
-                        Read Less
-                        <span
-                            class="d-flex align-items-center justify-content-center bg-teal rounded-circle ms-2 p-2 w-26p">
-                            <i class="fas fa-minus font-size-10 text-white"></i>
-                        </span>
-                    </span>
+                    
                 </a>
             </div>
 
             <div id="Curriculum" class="mb-8">
                 <ul class="nav course-tab-v1 border-bottom h4 mb-8">
                     <li class="nav-item">
-                        <a class="nav-link" href="#Overview" data-bs-toggle="smooth-scroll"
-                            data-bs-offset="0">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#Curriculum" data-bs-toggle="smooth-scroll"
+                        <a class="nav-link active" data-bs-toggle="smooth-scroll"
                             data-bs-offset="0">Courses</a>
                     </li>
                 </ul>
