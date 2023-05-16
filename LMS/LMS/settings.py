@@ -34,18 +34,19 @@ ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 INSTALLED_APPS = [
     'jazzmin',
     'ckeditor',
+    'crispy_forms',
+    'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',
-    'crispy_forms',
 
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# model fix in admin template
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
@@ -85,6 +86,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = 3
+
 
 if DEBUG and (DATABASES == 1):
     DATABASES = {

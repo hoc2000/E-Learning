@@ -33,6 +33,7 @@ class Course_display(admin.ModelAdmin):
         'author',
         'price',
         'created_at',
+        'update_at',
     ]
     list_display_links = [
         'title',

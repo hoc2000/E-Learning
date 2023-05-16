@@ -67,6 +67,7 @@ class Level(models.Model):
 
 class Language(models.Model):
     language = models.CharField(max_length=100)
+    number = models.IntegerField(default=0)
 
     def __str__(self):
         return self.language
@@ -83,13 +84,19 @@ class Comment(models.Model):
 # COURSE
 
 
+class AutoDateTimeField(models.DateTimeField):
+    def pre_save(self, model_instance, add):
+        return timezone.now()
+
+
 class Course(models.Model):
     STATUS = (
         ('PUBLISH', 'PUBLISH'),
         ('DRAFT', 'DRAFT'),
     )
     title = models.CharField(max_length=500)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    update_at = AutoDateTimeField(default=timezone.now)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
@@ -231,6 +238,7 @@ class Document(models.Model):
         ('pdf', 'pdf'),
         ('docx', 'docx'),
         ('pptx', 'pptx'),
+        ('rar', 'rar'),
     )
     name = models.CharField(max_length=100)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True)
