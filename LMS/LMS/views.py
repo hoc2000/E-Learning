@@ -5,6 +5,8 @@ import numpy as np
 import math as ceil
 from django.shortcuts import redirect, render
 from app.models import *
+from app.forms import PostCourse
+from django.core.mail import send_mail
 from django.views import View
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -74,6 +76,51 @@ def CONTACT_US(request):
         'course': course,
     }
     return render(request, 'Main/contact_us.html', context)
+
+# REQUEST COURSE FROM USER
+
+
+class REQUEST_COURSE (View):
+
+    def get(self, request):
+        form = PostCourse()
+        return render(request, 'Main/request_course.html', {'form': form})
+
+    def post(self, request):
+        # take the user from request
+
+        form = PostCourse(request.POST)
+        if form.is_valid():
+            # form.save()
+            user_mail = request.user.email
+            title = form.cleaned_data['title']
+            category = form.cleaned_data['category']
+            level = form.cleaned_data['level']
+            description = form.cleaned_data['description']
+            author = form.cleaned_data['author']
+
+            context = {
+                'title': title,
+                'category': category,
+                'level': level,
+                'description': description,
+                'author': author,
+            }
+
+            html = render_to_string('email/EmailSend.html', context)
+            print("----------------------")
+            print(user_mail)
+            print(context)
+            print(html)
+            print("----------------------")
+            send_mail("the request course from user",
+                      "This is the message", user_mail, ['vutuhoc@ansv.com'], html_message=html)
+
+            return redirect('request_course')
+        else:
+            HttpResponse('not validate')
+
+# ABOUT US
 
 
 def ABOUT_US(request):

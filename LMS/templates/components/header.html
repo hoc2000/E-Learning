@@ -120,6 +120,11 @@
                         My Courses
                     </a>
                 </li>
+                <li class="nav-item dropdown dropdown-full-width">
+                    <a class="nav-link text-gigas" href="{% url 'request_course' %}">
+                        Request Course
+                    </a>
+                </li>
                 {% endif %}
 
                 {% if user.is_authenticated and user.first_name == '' %}
@@ -137,12 +142,7 @@
                     <ul class="dropdown-menu border-xl shadow-none" aria-labelledby="user">
                         <li class="dropdown-item">
                             <a class="dropdown-link active" href="{% url 'profile' %}">
-                                Account
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="/my-course">
-                                Enrolled Courses
+                                Profile
                             </a>
                         </li>
                         <li class="dropdown-item">

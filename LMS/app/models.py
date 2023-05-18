@@ -96,7 +96,7 @@ class Course(models.Model):
     )
     title = models.CharField(max_length=500)
     created_at = models.DateTimeField(default=timezone.now)
-    update_at = AutoDateTimeField(default=timezone.now)
+    update_at = AutoDateTimeField(default=timezone.now, editable=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
@@ -104,7 +104,7 @@ class Course(models.Model):
     price = models.IntegerField(null=True, default=0)
     discount = models.IntegerField(null=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True)
-    deadline = models.CharField(max_length=100, null=True)
+    deadline = models.DateField(null=True)
     slug = models.SlugField(default='', max_length=500,
                             null=True, blank=True, editable=False)
     status = models.CharField(choices=STATUS, max_length=100, null=True)
@@ -287,6 +287,8 @@ difficulties = (
     ('Medium', 'Medium'),
     ('Hard', 'Hard'),
 )
+
+# --------QUIZ------------
 
 
 class Quizzes(models.Model):

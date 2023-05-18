@@ -29,6 +29,7 @@ class Course_display(admin.ModelAdmin):
     list_display = [
         'img_preview',
         'title',
+        'status',
         'category',
         'author',
         'price',
@@ -40,7 +41,8 @@ class Course_display(admin.ModelAdmin):
     ]
     list_filter = [
         'category',
-        'author'
+        'author',
+        'status',
     ]
     readonly_fields = ('img_preview', 'created_at')
 

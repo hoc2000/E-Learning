@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<!-- PAGE TITLE
+    ================================================== -->
+    <header class="py-8 py-md-11" style="background-image: none;">
+        <div class="container text-center py-xl-2">
+            <h1 class="display-4 fw-semi-bold mb-0">Send your course request for us</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-scroll justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a class="text-gray-800" href="{% url 'home' %}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item text-gray-800 active" aria-current="page">
+                        Get in touch today!
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Img -->
+        <img class="d-none img-fluid" src="...html" alt="...">
+    </header>
+
+
+    <!-- CONTACdT
+    ================================================== -->
+    <div class="container">
+        <form class="row" action=" {% url 'request_course' %}" method="post">
+        {% csrf_token %}
+        <div class = "form-group mb-6 col-xl-12">
+        <label for="exampleInputTitle1">Title</label>
+        {{form.title}}
+        </div>
+
+        <div class = "form-group mb-6 col-xl-4">
+        <label for="exampleInputTitle1">Category</label>   
+        {{form.category}}
+        </div>
+        
+        <div class = "form-group mb-6 col-xl-4">
+        <label for="exampleInputTitle1">Level</label>   
+        {{form.level}}
+        </div>
+
+        <div class = "form-group mb-6 col-xl-4">
+        <label for="exampleInputTitle1">Author</label>   
+        {{form.author}}
+        </div>
+
+        <div class = "form-group mb-6 col-12">
+        <label for="exampleInputTitle1">Description</label> 
+        <div>
+        {{form.media}}
+        {{form.description}}
+        </div>
+        
+        </div>
+
+        {% comment %} <div class = "form-group mb-6 col-4">
+        <label for="exampleInputTitle1">Deadline</label> 
+        {{form.deadline}}
+        </div> {% endcomment %}
+        <div class="col-12 mb-8">
+            <button type="submit" class="btn btn-primary btn-block mw-md-300p">SEND</button>
+        </div>
+        </form>
+       
+    </div>
+
+
+{% endblock %}

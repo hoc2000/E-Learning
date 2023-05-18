@@ -27,6 +27,10 @@ urlpatterns = [
 
     path('contact', views.CONTACT_US, name='contact_us'),
 
+    # Post request form user
+
+    path('request', views.REQUEST_COURSE.as_view(), name='request_course'),
+
     path('about', views.ABOUT_US, name='about_us'),
 
     path('accounts/register', user_login.REGISTER, name='register'),

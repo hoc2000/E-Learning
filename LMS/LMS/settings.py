@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -198,10 +197,10 @@ LOGIN_REDIRECT_URL = 'home'
 # LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'thomasvu2000@gmail.com'
-EMAIL_HOST_PASSWORD = 'bpgogoyrkizmiacj'
+EMAIL_HOST = 'smtp.ansv.vn'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'vutuhoc@ansv.vn'
+EMAIL_HOST_PASSWORD = 'Hoc@123'
 
 KEY_ID = ''
 KEY_SECRET = ''
