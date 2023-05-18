@@ -91,7 +91,7 @@ class REQUEST_COURSE (View):
 
         form = PostCourse(request.POST)
         if form.is_valid():
-            # form.save()
+            form.save()
             user_mail = request.user.email
             title = form.cleaned_data['title']
             category = form.cleaned_data['category']
