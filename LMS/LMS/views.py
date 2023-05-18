@@ -114,7 +114,7 @@ class REQUEST_COURSE (View):
             print(html)
             print("----------------------")
             send_mail("the request course from user",
-                      "This is the message", user_mail, ['haminhhoang@ansv.vn', 'vutuhoc@ansv.vn'], fail_silently=False, html_message=html)
+                      "This is the message", user_mail, ['haminhhoang@ansv.vn', 'vutuhoc@ansv.vn', 'tranthanhnga@ansv.vn'], fail_silently=False, html_message=html)
 
             return redirect('request_course')
         else:
