@@ -92,8 +92,8 @@ class AutoDateTimeField(models.DateTimeField):
 
 class Course(models.Model):
     STATUS = (
-        ('PUBLISH', 'PUBLISH'),
-        ('DRAFT', 'DRAFT'),
+        ('XEM ĐƯỢC', 'XEM ĐƯỢC'),
+        ('NHÁP', 'NHÁP'),
     )
     title = models.CharField(max_length=500)
     created_at = models.DateTimeField(default=timezone.now)
@@ -108,7 +108,8 @@ class Course(models.Model):
     deadline = models.DateField(null=True)
     slug = models.SlugField(default='', max_length=500,
                             null=True, blank=True, editable=False)
-    status = models.CharField(choices=STATUS, max_length=100, null=True)
+    status = models.CharField(
+        choices=STATUS, default='NHÁP', max_length=100, null=True)
     certificate = models.CharField(max_length=100, null=True)
     featured_image = models.ImageField(
         upload_to="featured_img", default='static/course_all.png', null=True)

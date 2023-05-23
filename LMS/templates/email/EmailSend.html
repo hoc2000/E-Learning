@@ -1,5 +1,6 @@
+{% load static %}
 <h2>Notification new Course</h2>
- <p> we have new course had been registered by <b>{{user.first_name}}</b> : </p> 
+ <p> we have new course had been registered by <b>{{user.email}}</b> : </p> 
 <b>Title :</b> {{title}} 
 <br>
 <b>Category :</b> {{category}}
@@ -10,4 +11,5 @@
 <br>
 <b>Author :</b> {{author}}
 
-<h1>ANSV</h1>
+<br> Best regrad ~ 
+<img src="{% static 'assets/img/mail_logo.png' %} " alt="">

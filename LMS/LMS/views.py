@@ -26,7 +26,7 @@ def BASE(request):
 
 def HOME(request):
     category = Categories.objects.all().order_by('id')[0:5]
-    course = Course.objects.filter(status='PUBLISH').order_by('-id')
+    course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
     user = request.user
     author = Author.objects.all().order_by('id')
     context = {
@@ -69,7 +69,7 @@ def COURSE_GRID(request):
 
 def CONTACT_US(request):
     category = Categories.objects.all().order_by('id')[0:5]
-    course = Course.objects.filter(status='PUBLISH').order_by('-id')
+    course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
 
     context = {
         'category': category,
@@ -125,7 +125,7 @@ class REQUEST_COURSE (View):
 
 def ABOUT_US(request):
     category = Categories.objects.all().order_by('id')[0:5]
-    course = Course.objects.filter(status='PUBLISH').order_by('-id')
+    course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
 
     context = {
         'category': category,
