@@ -53,19 +53,34 @@ class Course_display(admin.ModelAdmin):
     # Change from query set to JSON
     def changelist_view(self, request, extra_context=None):
         # Aggregate new authors per day
-        tz = pytz.timezone('Asia/Bangkok')
-        chart_data_course = (
-            Course.objects.annotate(
+        # tz = pytz.timezone('Asia/Bangkok')
+        data_course_publish = (
+            Course.objects
+            .filter(status="XEM ĐƯỢC")
+            .annotate(
                 date=ExtractMonth("created_at"))
             .values("date")
             .annotate(y=Count("id"))
             .order_by("date")
         )
+        data_course_draft = (
+            Course.objects
+            .filter(status="NHÁP")
+            .annotate(
+                date2=ExtractMonth("created_at"))
+            .values("date2")
+            .annotate(y=Count("id"))
+            .order_by("date2")
+        )
+
         # Serialize and attach the chart data to the template context
-        as_json = json.dumps(list(chart_data_course), cls=DjangoJSONEncoder)
+        as_json = json.dumps(list(data_course_publish), cls=DjangoJSONEncoder)
+        as_json2 = json.dumps(list(data_course_draft), cls=DjangoJSONEncoder)
         print("Json %s" % as_json)
-        extra_context = extra_context or {"chart_data_course": as_json}
-        # Call the superclass changelist_view to render the page
+        print("Json %s" % as_json2)
+        extra_context = extra_context or {
+            "data_course_publish": as_json,
+            "data_course_draft": as_json2}
 
         return super().changelist_view(request, extra_context=extra_context)
 
@@ -114,6 +129,14 @@ class Author_display(admin.ModelAdmin):
 # LESSON
 
 
+class Department_display(admin.ModelAdmin):
+    list_display = [
+        'img_preview',
+        'name',
+    ]
+    list_per_page = 11
+
+
 class Lesson_display(admin.ModelAdmin):
     list_display = [
         'name',
@@ -159,6 +182,7 @@ admin.site.register(Author, Author_display)
 admin.site.register(Course, Course_display)
 admin.site.register(Comment)
 admin.site.register(Level)
+admin.site.register(Department, Department_display)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Requirements)
 admin.site.register(Lesson, Lesson_display)

@@ -85,6 +85,24 @@ class Comment(models.Model):
 # COURSE
 
 
+class Department(models.Model):
+    name = models.CharField(max_length=100)
+    description = RichTextField()
+    image_dep = models.ImageField(
+        upload_to="featured_img", null=True)
+
+    def short_description(self):
+        return truncatechars(self.description, 20)
+
+    def img_preview(self):
+        return mark_safe('<img src="{}" width="80" />'.format(self.image_dep.url))
+    img_preview.short_description = 'Image'
+    img_preview.allow_tags = True
+
+    def __str__(self):
+        return self.name
+
+
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
@@ -99,18 +117,20 @@ class Course(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     update_at = AutoDateTimeField(default=timezone.now, editable=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
+    level = models.ForeignKey(
+        Level, on_delete=models.CASCADE, null=True, blank=True)
     description = RichTextField()
-    price = models.IntegerField(null=True, default=0)
-    discount = models.IntegerField(null=True)
+    price = models.IntegerField(null=True, default=0, blank=True)
+    discount = models.IntegerField(null=True, blank=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True)
-    deadline = models.DateField(null=True)
+    date_start = models.DateField(null=True, blank=True)
     slug = models.SlugField(default='', max_length=500,
                             null=True, blank=True, editable=False)
     status = models.CharField(
         choices=STATUS, default='NHÁP', max_length=100, null=True)
-    certificate = models.CharField(max_length=100, null=True)
     featured_image = models.ImageField(
         upload_to="featured_img", default='static/course_all.png', null=True)
 

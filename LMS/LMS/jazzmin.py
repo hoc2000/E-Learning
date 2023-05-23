@@ -106,6 +106,7 @@ JAZZMIN_SETTINGS = {
         "auth.Group": "fas fa-users",
         "app.author": " fas fa-chalkboard-teacher",
         "app.categories": "fas fa-cat",
+        "app.department": "fas fa-building",
         "app.comment": "fas fa-comment",
         "app.course": "fas fa-book",
         "app.payment": "fas fa-money-bill",

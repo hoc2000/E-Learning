@@ -11,18 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = document.getElementById('myChart').getContext('2d');
 
   // Sample data
-  const chartDataCourse = {{chart_data_course | safe}};
-  const monthNames = ["null","January", "February", "March", "April", "May", "June",
+  const DataCoursePublish = {{data_course_publish | safe}};
+  const DataCOurseDraft ={{data_course_draft | safe}}
+  const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"];
+  
+  let ZeroValMonthPuB = [0,0,0,0,0,0,0,0,0,0,0,0]
+  let ZeroValMonthD = [0,0,0,0,0,0,0,0,0,0,0,0]
 
-  const monthLabel = []
-  const courseCount = []
-  console.log(chartDataCourse)
+  let monthLabel = []
+  let PcourseCount 
+  let DCourseCount = []
+  console.log(DataCoursePublish);
+  console.log(DataCOurseDraft);
   // Parse the dates to JS
-  chartDataCourse.forEach((d) => {
-    d.x = monthNames[d.date];
-    monthLabel.push(d.x)
-    courseCount.push(d.y)
+  DataCoursePublish.forEach((d) => {
+    ZeroValMonthPuB[d.date-1] = d.y;
+    PcourseCount = ZeroValMonthPuB
+  });
+
+  DataCOurseDraft.forEach((d) => {
+    ZeroValMonthD[d.date2-1] = d.y;
+    DCourseCount = ZeroValMonthD
   });
   console.log(monthLabel)
 
@@ -32,13 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   data: {
-     labels : monthLabel,
+     labels : monthNames,
      datasets: [
         {
-          label: "Courses",
+          label: "Courses Publish" ,
           backgroundColor: "#79AEC8",
           borderColor: "#417690",
-          data: courseCount,
+          data: PcourseCount,
+        },
+        {
+          label: "Courses Draft",
+          backgroundColor: "#00FF00",
+          borderColor: "#00FF00",
+          data: DCourseCount,
         }
      ]
   },
