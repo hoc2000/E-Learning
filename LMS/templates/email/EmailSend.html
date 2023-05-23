@@ -1,9 +1,13 @@
 <h2>Notification new Course</h2>
-<p>we have new course:</p>
-<b>Title :</b> <p>{{context.title}}</p>
-<b>Category :</b> <p>{{context.category}}</p>
-<b>Level :</b> <p>{{context.level}}</p>
-<b>Description :</b> <p>{{context.description}}</p>
-<b>Author :</b> <p>{{context.description}}</p>
+ <p> we have new course had been registered by <b>{{user.first_name}}</b> : </p> 
+<b>Title :</b> {{title}} 
+<br>
+<b>Category :</b> {{category}}
+<br>
+<b>Level :</b> {{level}}
+<br>
+<b>Description :</b> {{description | safe}}
+<br>
+<b>Author :</b> {{author}}
 
 <h1>ANSV</h1>

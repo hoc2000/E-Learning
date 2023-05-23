@@ -1,8 +1,32 @@
+import json
+
 from django.contrib import admin
 from .models import *
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models.functions import ExtractMonth
+from django.db.models import Count
+from django.utils import timezone
+import pytz
+from django.db.models.functions import TruncDay, TruncDate, TruncMonth
 # Register your models here.
 
 # TabularInline in course
+
+
+# class course_data(admin.AdminSite):
+#     def changelist_view(self, request, extra_context=None):
+#         # Aggregate new authors per day
+#         tz = pytz.timezone('Asia/Bangkok')
+#         chart_data_course = (
+#             Course.objects.annotate(date=TruncDay("created_at", tzinfo=tz))
+#             .values("date")
+#             .annotate(y=Count("id"))
+#             .order_by("-date")
+#         )
+#         # Serialize and attach the chart data to the template context
+#         as_json = json.dumps(list(chart_data_course), cls=DjangoJSONEncoder)
+#         print("Json %s" % as_json)
+#         extra_context = extra_context or {"chart_data_course": as_json}
 
 
 class what_you_learn_TabularInline(admin.TabularInline):
@@ -26,6 +50,25 @@ class Lesson_TaularInline(admin.TabularInline):
 
 
 class Course_display(admin.ModelAdmin):
+    # Change from query set to JSON
+    def changelist_view(self, request, extra_context=None):
+        # Aggregate new authors per day
+        tz = pytz.timezone('Asia/Bangkok')
+        chart_data_course = (
+            Course.objects.annotate(
+                date=ExtractMonth("created_at"))
+            .values("date")
+            .annotate(y=Count("id"))
+            .order_by("date")
+        )
+        # Serialize and attach the chart data to the template context
+        as_json = json.dumps(list(chart_data_course), cls=DjangoJSONEncoder)
+        print("Json %s" % as_json)
+        extra_context = extra_context or {"chart_data_course": as_json}
+        # Call the superclass changelist_view to render the page
+
+        return super().changelist_view(request, extra_context=extra_context)
+
     list_display = [
         'img_preview',
         'title',
@@ -39,6 +82,7 @@ class Course_display(admin.ModelAdmin):
     list_display_links = [
         'title',
     ]
+
     list_filter = [
         'category',
         'author',
@@ -48,6 +92,7 @@ class Course_display(admin.ModelAdmin):
 
     inlines = (what_you_learn_TabularInline,
                Requirements_TabularInline, Lesson_TaularInline)
+    ordering = ("-created_at",)
     list_per_page = 11
 
 

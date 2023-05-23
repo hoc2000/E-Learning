@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 import random
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 # Categoriess
 # Color
@@ -40,7 +41,7 @@ class Author(models.Model):
     slug = models.SlugField(default='', max_length=500,
                             null=True, blank=True,)
     created_at = models.DateTimeField(
-        default=timezone.datetime.now(), editable=False)
+        default=timezone.now, editable=False)
 
     @property
     def short_description(self):

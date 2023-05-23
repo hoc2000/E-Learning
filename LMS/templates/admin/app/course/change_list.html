@@ -1,0 +1,77 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  // Sample data
+  const chartDataCourse = {{chart_data_course | safe}};
+  const monthNames = ["null","January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+
+  const monthLabel = []
+  const courseCount = []
+  console.log(chartDataCourse)
+  // Parse the dates to JS
+  chartDataCourse.forEach((d) => {
+    d.x = monthNames[d.date];
+    monthLabel.push(d.x)
+    courseCount.push(d.y)
+  });
+  console.log(monthLabel)
+
+  // Render the chart
+  let chart = new Chart(ctx, {
+  type: "bar",
+  
+
+  data: {
+     labels : monthLabel,
+     datasets: [
+        {
+          label: "Courses",
+          backgroundColor: "#79AEC8",
+          borderColor: "#417690",
+          data: courseCount,
+        }
+     ]
+  },
+   options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      title: {
+        text : "Monthly Statistics ",
+        display: true
+      }
+  },
+});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Render our chart -->
+<div class= "col-md-6 col-sm-12">
+  <div class ="card">
+      <div class="card-header">
+        <h5> Course-chart </h5>
+      </div>
+      <div class="card-body">
+        <div style="width: 80%;">
+          <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Render the rest of the ChangeList view -->
+{{ block.super }}
+{% endblock %}

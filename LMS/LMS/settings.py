@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$q-5r0mxb%y(5k&l%1+c*@dc89_a7&pn)f=!wgm3d_mz!5-0%)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 
@@ -116,7 +116,7 @@ elif DEBUG and (DATABASES == 2):
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-elif DEBUG and (DATABASES == 3):
+elif (DATABASES == 3):
     DATABASES = {
         "default": {
             "ENGINE": "mssql",
@@ -128,7 +128,7 @@ elif DEBUG and (DATABASES == 3):
 
         },
     }
-elif DEBUG and (DATABASES == 4):
+elif (DATABASES == 4):
     DATABASES = {
         'default': {
             'ENGINE': 'sql_server.pyodbc',
