@@ -76,8 +76,10 @@ class Course_display(admin.ModelAdmin):
         # Serialize and attach the chart data to the template context
         as_json = json.dumps(list(data_course_publish), cls=DjangoJSONEncoder)
         as_json2 = json.dumps(list(data_course_draft), cls=DjangoJSONEncoder)
+
         print("Json %s" % as_json)
         print("Json %s" % as_json2)
+
         extra_context = extra_context or {
             "data_course_publish": as_json,
             "data_course_draft": as_json2}

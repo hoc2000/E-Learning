@@ -118,7 +118,7 @@ class Course(models.Model):
     update_at = AutoDateTimeField(default=timezone.now, editable=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     department = models.ForeignKey(
-        Department, on_delete=models.CASCADE, null=True)
+        Department, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     level = models.ForeignKey(
         Level, on_delete=models.CASCADE, null=True, blank=True)

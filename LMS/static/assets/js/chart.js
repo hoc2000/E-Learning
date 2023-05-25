@@ -1,17 +1,10 @@
-{% extends "admin/change_list.html" %}
-{% load static %}
-
-<!-- Override extrahead to add Chart.js -->
-{% block extrahead %}
-{{ block.super }}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-<script>
 document.addEventListener('DOMContentLoaded', () => {
     const ctx1 = document.getElementById('myChart').getContext('2d');
+    const ctx2 = document.getElementById('myChart2').getContext('2d');
+
     // Sample data
-    const DataCoursePublish = {{ data_course_publish | safe}};
-    const DataCOurseDraft = {{ data_course_draft | safe}}
+    // const DataCoursePublish = {{ data_course_publish | safe}};
+    // const DataCOurseDraft = {{ data_course_draft | safe}}
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
 
@@ -70,25 +63,31 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 
+    let chart2 = new Chart(ctx1, {
+        type: "doughnut",
+
+
+        data: {
+            labels: monthNames,
+            datasets: [
+                {
+                    label: "Courses Publish",
+                    backgroundColor: "#79AEC8",
+                    borderColor: "#417690",
+                    data: PcourseCount,
+                },
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            title: {
+                text: "Monthly Statistics ",
+                display: true
+            }
+        },
+    });
 });
-</script>
-{% endblock %}
-
-{% block content %}
-<!-- Render our chart -->
-<div class= "col-md-9 col-sm-12">
-  <div class ="card">
-      <div class="card-header">
-        <h5> Course-chart </h5>
-      </div>
-      <div class="card-body">
-        <div style="height: 80%;">
-          <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
-        </div>
-      </div>
-    </div>
-</div>
-
-<!-- Render the rest of the ChangeList view -->
-{{ block.super }}
-{% endblock %}

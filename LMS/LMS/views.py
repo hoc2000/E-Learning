@@ -25,16 +25,17 @@ def BASE(request):
 
 
 def HOME(request):
-    category = Categories.objects.all().order_by('id')[0:5]
+    category = Categories.objects.all().order_by('id')[0:6]
     course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
     user = request.user
     author = Author.objects.all().order_by('id')
+    department = Department.objects.all().order_by('id')
     context = {
         'category': category,
         'course': course,
         'user': user,
         'author': author,
-        'range': range(4),
+        'department': department,
     }
     return render(request, 'Main/home.html', context)
 
