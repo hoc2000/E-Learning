@@ -58,19 +58,19 @@ class Course_display(admin.ModelAdmin):
             Course.objects
             .filter(status="XEM ĐƯỢC")
             .annotate(
-                date=ExtractMonth("created_at"))
-            .values("date")
+                month=ExtractMonth("created_at"))
+            .values("month")
             .annotate(y=Count("id"))
-            .order_by("date")
+            .order_by("month")
         )
         data_course_draft = (
             Course.objects
             .filter(status="NHÁP")
             .annotate(
-                date2=ExtractMonth("created_at"))
-            .values("date2")
+                month2=ExtractMonth("created_at"))
+            .values("month2")
             .annotate(y=Count("id"))
-            .order_by("date2")
+            .order_by("month2")
         )
 
         # Serialize and attach the chart data to the template context

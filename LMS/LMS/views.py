@@ -5,6 +5,7 @@ import numpy as np
 import math as ceil
 from django.shortcuts import redirect, render
 from app.models import *
+from .filter import CourseFilter
 from app.forms import PostCourse
 from django.core.mail import send_mail
 from django.views import View
@@ -46,13 +47,15 @@ def COURSE_GRID(request):
     category = Categories.get_all_category(Categories)
     level = Level.objects.all()
     course_list = Course.objects.all()
+    myFilter = CourseFilter(request.GET, queryset=course_list)
+    course_list = myFilter.qs
     # lấy page ban đầu lấy là 1
     page = request.GET.get('page', 1)
-
     # 6 course 1 page
     # print("Số trang sẽ được tạo là:", page)
     paginator = Paginator(course_list, 9)
     # print(page.num_pages)
+
     try:
         course = paginator.page(page)
     except PageNotAnInteger:
@@ -61,9 +64,11 @@ def COURSE_GRID(request):
     #     course = paginator.page(paginator.num_pages)
     # print(course.paginator.page_range)
     context = {
+        'course_list': course_list,
         'category': category,
         'level': level,
         'course': course,
+        'myFilter': myFilter,
     }
     return render(request, 'Main/course_grid.html', context)
 

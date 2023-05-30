@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 {% load course_tags %}
-
+{% load widget_tweaks %}
 <script>
     
     $(document).ready(function () {
@@ -39,7 +39,7 @@
 
 <!-- PAGE TITLE
     ================================================== -->
-<header class="py-8 py-lg-12 overlay overlay-dark overlay-40" style="background-image: url({% static 'assets/img/covers/cover-19.jpg' %});">
+<header class="py-8 py-lg-12 mb-8 overlay overlay-dark overlay-40" style="background-image: url({% static 'assets/img/covers/cover-19.jpg' %});">
     <div class="container text-center py-xl-5">
         <h1 class="display-4 fw-semi-bold mb-0 text-white">Courses</h1>
         <nav aria-label="breadcrumb">
@@ -59,7 +59,6 @@
     <img class="d-none img-fluid" src="...html" alt="...">
 </header>
 
-<section class=" pt-8 background-hoc overlay overlay-black overlay-80">
 <!-- CONTROL BAR
     ================================================== -->
 {% comment %} <div class="container mb-6 mb-xl-8 z-index-2">
@@ -85,10 +84,10 @@
 
     <!-- CONTROL BAR
     ================================================== -->
-<div class="container mb-6 mb-xl-8 z-index-2">
-        <div class="d-xl-flex align-items-center">
-            <p class="mb-xl-0">We found <span class="text-dark">{{course.count}} courses</span> available for you</p>
-            <div class="ms-xl-auto d-xl-flex flex-wrap">
+<div class="container mb-6 mb-xl-8 z-index-2 ">
+        <div class="d-xl-flex align-items-center justify-content-between">
+            <p class="mb-xl-0">We found <span class="text-dark"><b> {{course_list.count}} courses </b></span> available for you</p>
+            {% comment %} <div class="ms-xl-auto d-xl-flex flex-wrap">
 
                 <div class="mb-4 mb-xl-0 ms-xl-6">
                     <select class="form-select form-select-sm text-dark shadow-none dropdown-menu-end" data-choices>
@@ -102,15 +101,24 @@
                 <div class="mb-4 mb-xl-0 ms-xl-6">
                     <div class="border rounded d-flex align-items-center choices-label h-50p">
                         <span class="ps-5">Sort by:</span>
-                        <select class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end" data-choices>
-                            <option>Default</option>
-                            <option>New Courses</option>
-                            <option>Price Low to High</option>
-                            <option>Price High to low</option>
-                        </select>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
+            <form method="get">
+                <div class="ms-xl-auto d-xl-flex flex-wrap">
+                        <div class="mb-4 mb-xl-0 ms-xl-6">
+                            {{myFilter.form.title}}
+                        </div>
+                        <div class="mb-4 mb-xl-0 ms-xl-6" >
+                            {% render_field myFilter.form.category class="form-select form-select-sm text-dark shadow-none"  %}
+                        </div>
+                        <div class="mb-4 mb-xl-0 ms-xl-6" >
+                            <button class=" bg-dark btn btn-sm text-white" type ="submit">Search</button>
+                        </div>
+                </div>
+                
+                
+            </form>
         </div>
     </div>
      <!-- COURSE 11/5 update
@@ -588,5 +596,4 @@
         </div>
     </div>
 </div> {% endcomment %}
-</section>
 {% endblock %}

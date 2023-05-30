@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'jazzmin',
     'ckeditor',
     'crispy_forms',
+    'widget_tweaks',
     'app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
 
 ]
 
@@ -172,7 +174,7 @@ TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

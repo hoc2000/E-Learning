@@ -23,14 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let DCourseCount = []
     console.log(DataCoursePublish);
     console.log(DataCOurseDraft);
-    // Parse the dates to JS
+    // Parse the months to JS
     DataCoursePublish.forEach((d) => {
-        ZeroValMonthPuB[d.date - 1] = d.y;
+        ZeroValMonthPuB[d.month - 1] = d.y;
         PcourseCount = ZeroValMonthPuB
     });
 
     DataCOurseDraft.forEach((d) => {
-        ZeroValMonthD[d.date2 - 1] = d.y;
+        ZeroValMonthD[d.month2 - 1] = d.y;
         DCourseCount = ZeroValMonthD
     });
     console.log(monthLabel)
