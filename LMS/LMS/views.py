@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Sum
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .settings import *
@@ -43,6 +44,7 @@ def HOME(request):
 # Tạo course grid và pagination
 
 
+@login_required
 def COURSE_GRID(request):
     category = Categories.get_all_category(Categories)
     level = Level.objects.all()
@@ -73,6 +75,7 @@ def COURSE_GRID(request):
     return render(request, 'Main/course_grid.html', context)
 
 
+@login_required
 def CONTACT_US(request):
     category = Categories.objects.all().order_by('id')[0:5]
     course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
@@ -170,6 +173,7 @@ def SEARCH_COURSE(request):
     return render(request, 'search/search.html', context)
 
 
+@login_required
 def COURSE_DETAILS(request, slug):
     courses = Course.objects.all()
     category = Categories.get_all_category(Categories)

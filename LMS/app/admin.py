@@ -131,14 +131,6 @@ class Author_display(admin.ModelAdmin):
 # LESSON
 
 
-class Department_display(admin.ModelAdmin):
-    list_display = [
-        'img_preview',
-        'name',
-    ]
-    list_per_page = 11
-
-
 class Lesson_display(admin.ModelAdmin):
     list_display = [
         'name',
@@ -184,7 +176,6 @@ admin.site.register(Author, Author_display)
 admin.site.register(Course, Course_display)
 admin.site.register(Comment)
 admin.site.register(Level)
-admin.site.register(Department, Department_display)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Requirements)
 admin.site.register(Lesson, Lesson_display)

@@ -85,24 +85,6 @@ class Comment(models.Model):
 # COURSE
 
 
-class Department(models.Model):
-    name = models.CharField(max_length=100)
-    description = RichTextField()
-    image_dep = models.ImageField(
-        upload_to="featured_img", null=True)
-
-    def short_description(self):
-        return truncatechars(self.description, 20)
-
-    def img_preview(self):
-        return mark_safe('<img src="{}" width="80" />'.format(self.image_dep.url))
-    img_preview.short_description = 'Image'
-    img_preview.allow_tags = True
-
-    def __str__(self):
-        return self.name
-
-
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
         return timezone.now()
@@ -117,8 +99,6 @@ class Course(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     update_at = AutoDateTimeField(default=timezone.now, editable=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
-    department = models.ForeignKey(
-        Department, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     level = models.ForeignKey(
         Level, on_delete=models.CASCADE, null=True, blank=True)
