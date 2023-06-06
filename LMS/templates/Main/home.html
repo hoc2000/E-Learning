@@ -403,7 +403,7 @@
 
 <!-- CATEGORIES
     ================================================== -->
-<section class=" py-5 py-md-8 bg-white">
+{% comment %} <section class=" py-5 py-md-8 bg-white">
     <div class="container container-wd">
         <div class="row align-items-end mb-md-7 mb-4">
             <div class="col-md mb-4 mb-md-0">
@@ -472,7 +472,7 @@
                     </div>
                 </a>
             </div> {% endcomment %}
-        </div>
+        {% comment %} </div>
 
         <div class="row row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
             {% for i in department  %}
@@ -504,8 +504,8 @@
 
 
         </div>
-    </div>
-</section> 
+    </div> {% endcomment %
+{% comment %} </section>  {% endcomment %}
 
 <!-- INSTRUCTORS
     ================================================== -->
