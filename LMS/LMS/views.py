@@ -30,7 +30,7 @@ def HOME(request):
     category = Categories.objects.all().order_by('id')[0:6]
     course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
     user = request.user
-    author = Author.objects.all().order_by('id')
+    author = Department.objects.all().order_by('id')
     context = {
         'category': category,
         'course': course,
@@ -353,7 +353,7 @@ def WATCH_COURSE(request, slug):
 
 class VIEW_INSTRUCTOR(View):
     def get(self, request, author_id):
-        Select_author = Author.objects.get(id=author_id)
+        Select_author = Department.objects.get(id=author_id)
         course = Course.objects.filter(author_id=author_id)
         category = Categories.get_all_category(Categories)
 

@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='department',
+            model_name='author',
             name='image',
             field=models.ImageField(null=True, upload_to='featured_img'),
         ),

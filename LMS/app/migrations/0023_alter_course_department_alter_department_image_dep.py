@@ -13,11 +13,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='course',
-            name='department',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app.department'),
+            name='author',
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app.author'),
         ),
         migrations.AlterField(
-            model_name='department',
+            model_name='author',
             name='image_dep',
             field=models.ImageField(null=True, upload_to='featured_img'),
         ),

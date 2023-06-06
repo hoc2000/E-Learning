@@ -33,7 +33,7 @@ class Categories(models.Model):
 ####### AUTHOR models#############
 
 
-class Author(models.Model):
+class Department(models.Model):
     author_profile = models.ImageField(
         upload_to="author", default='author/2021-11-19-14-04-25_0.png')
     name = models.CharField(max_length=100, null=True)
@@ -98,7 +98,8 @@ class Course(models.Model):
     title = models.CharField(max_length=500)
     created_at = models.DateTimeField(default=timezone.now)
     update_at = AutoDateTimeField(default=timezone.now, editable=False)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(
+        Department, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     level = models.ForeignKey(
         Level, on_delete=models.CASCADE, null=True, blank=True)
@@ -161,7 +162,7 @@ def create_slug_author(instance, new_slug=None):
     slug = slugify(instance.name)
     if new_slug is not None:
         slug = new_slug
-    qs = Author.objects.filter(slug=slug).order_by('-id')
+    qs = Department.objects.filter(slug=slug).order_by('-id')
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" % (slug, qs.first().id)
@@ -176,7 +177,7 @@ def pre_save_post_receiver_author(sender, instance, *args, **kwargs):
 
 # PreSave sau khi Save
 pre_save.connect(pre_save_post_receiver_course, Course)
-pre_save.connect(pre_save_post_receiver_author, Author)
+pre_save.connect(pre_save_post_receiver_author, Department)
 
 
 class What_you_learn(models.Model):

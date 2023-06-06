@@ -9,7 +9,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "CoursePM",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "assets/img/ansv_logo.png",
+    "site_logo": "assets/img/book_logo.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
@@ -106,7 +106,7 @@ JAZZMIN_SETTINGS = {
         "auth.Group": "fas fa-users",
         "app.author": " fas fa-chalkboard-teacher",
         "app.categories": "fas fa-cat",
-        "app.department": "fas fa-building",
+        "app.author": "fas fa-building",
         "app.comment": "fas fa-comment",
         "app.course": "fas fa-book",
         "app.payment": "fas fa-money-bill",

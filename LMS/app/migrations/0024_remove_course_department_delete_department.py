@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='course',
-            name='department',
+            name='author',
         ),
         migrations.DeleteModel(
             name='Department',

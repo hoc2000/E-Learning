@@ -13,8 +13,9 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='course',
-            name='department',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='app.department'),
+            name='author',
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, to='app.author'),
         ),
         migrations.AlterField(
             model_name='course',
@@ -29,7 +30,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='course',
             name='level',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app.level'),
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app.level'),
         ),
         migrations.AlterField(
             model_name='course',

@@ -113,7 +113,7 @@ class Course_display(admin.ModelAdmin):
     list_per_page = 11
 
 
-class Author_display(admin.ModelAdmin):
+class Department_display(admin.ModelAdmin):
     list_display = [
         'img_preview',
         'name',
@@ -172,7 +172,7 @@ class VideoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Categories)
-admin.site.register(Author, Author_display)
+admin.site.register(Department, Department_display)
 admin.site.register(Course, Course_display)
 admin.site.register(Comment)
 admin.site.register(Level)

@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='author',
             name='created_at',
-            field=models.DateTimeField(default=datetime.datetime(2023, 5, 18, 15, 47, 40, 612170), editable=False),
+            field=models.DateTimeField(default=datetime.datetime(
+                2023, 5, 18, 15, 47, 40, 612170), editable=False),
         ),
         migrations.AlterField(
             model_name='course',
@@ -26,6 +27,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='course',
             name='update_at',
-            field=app.models.AutoDateTimeField(default=django.utils.timezone.now, editable=False),
+            field=app.models.AutoDateTimeField(
+                default=django.utils.timezone.now, editable=False),
         ),
     ]

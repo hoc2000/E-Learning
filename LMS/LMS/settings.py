@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost', '10.2.6.144', '127.0.0.1', '*']
 # Application definition
 
 INSTALLED_APPS = [
+    # 'admin_argon.apps.AdminArgonConfig',
     'jazzmin',
     'ckeditor',
     'crispy_forms',

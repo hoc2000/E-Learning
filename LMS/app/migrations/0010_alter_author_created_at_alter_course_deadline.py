@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='author',
             name='created_at',
-            field=models.DateTimeField(default=datetime.datetime(2023, 5, 18, 10, 27, 1, 459374), editable=False),
+            field=models.DateTimeField(default=datetime.datetime(
+                2023, 5, 18, 10, 27, 1, 459374), editable=False),
         ),
         migrations.AlterField(
             model_name='course',

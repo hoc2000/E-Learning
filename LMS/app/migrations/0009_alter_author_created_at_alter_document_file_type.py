@@ -14,11 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='author',
             name='created_at',
-            field=models.DateTimeField(default=datetime.datetime(2023, 5, 18, 9, 31, 6, 494211), editable=False),
+            field=models.DateTimeField(default=datetime.datetime(
+                2023, 5, 18, 9, 31, 6, 494211), editable=False),
         ),
         migrations.AlterField(
             model_name='document',
             name='file_type',
-            field=models.CharField(blank=True, choices=[('pdf', 'pdf'), ('docx', 'docx'), ('pptx', 'pptx'), ('rar', 'rar')], max_length=10, null=True),
+            field=models.CharField(blank=True, choices=[(
+                'pdf', 'pdf'), ('docx', 'docx'), ('pptx', 'pptx'), ('rar', 'rar')], max_length=10, null=True),
         ),
     ]
