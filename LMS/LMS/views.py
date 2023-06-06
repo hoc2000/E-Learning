@@ -31,13 +31,11 @@ def HOME(request):
     course = Course.objects.filter(status='XEM ĐƯỢC').order_by('-id')
     user = request.user
     author = Author.objects.all().order_by('id')
-    department = Department.objects.all().order_by('id')
     context = {
         'category': category,
         'course': course,
         'user': user,
         'author': author,
-        'department': department,
     }
     return render(request, 'Main/home.html', context)
 
