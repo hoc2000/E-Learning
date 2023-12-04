@@ -128,7 +128,10 @@ elif DEBUG and (DATABASES == 3):
             "PASSWORD": "tranquan98.kt",
             "HOST": "10.2.6.73",
             "PORT": "1433",
-
+            'OPTIONS': {
+                'driver': 'ODBC Driver 17 for SQL Server',
+                'timeout': 60,
+            },
         },
     }
 elif (DATABASES == 4):
